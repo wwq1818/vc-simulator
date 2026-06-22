@@ -353,8 +353,8 @@ const eventDeck = [
     category: "办公室政治",
     description: "项目是你最早看的，但临门一脚被更资深的人接走。你可以争，也可以忍。",
     choices: [
-      { text: "在周会上把贡献说清楚", effects: { network: -4, track: 3, promotion: 8, health: -1 }, note: "你没有撕破脸，但所有人都知道这件事不是凭空发生的。" },
-      { text: "暂时忍下，换取下次主导权", effects: { network: 5, promotion: 4, health: -1 }, note: "你把委屈记进了工作笔记，也换来合伙人的一个口头承诺。" },
+      { text: "在周会上把贡献说清楚", effects: { network: -4, track: 3, career: 8, health: -1 }, note: "你没有撕破脸，但所有人都知道这件事不是凭空发生的。" },
+      { text: "暂时忍下，换取下次主导权", effects: { network: 5, career: 4, health: -1 }, note: "你把委屈记进了工作笔记，也换来合伙人的一个口头承诺。" },
       { text: "接受一家创业公司的战投 Offer", effects: { careerExit: "corpdev", health: 8 }, note: "你离开基金，去企业做战略投资。牌桌换了，游戏也换了。" },
     ],
   },
@@ -363,7 +363,7 @@ const eventDeck = [
     category: "办公室政治",
     description: "他带来一套新的打法，也带来一批自己人。你的项目排期被往后挪了。",
     choices: [
-      { text: "主动靠过去，学习他的打法", effects: { network: 6, promotion: 5, health: -1 }, note: "你不喜欢这种姿态，但你承认他确实知道怎么赢内部资源。" },
+      { text: "主动靠过去，学习他的打法", effects: { network: 6, career: 5, health: -1 }, note: "你不喜欢这种姿态，但你承认他确实知道怎么赢内部资源。" },
       { text: "守住自己的赛道，不站队", effects: { track: 4, network: -5, health: -1 }, note: "你保住了判断独立性，也暂时失去了一些会议室里的盟友。" },
       { text: "转去产业方做投资负责人", effects: { careerExit: "industry", health: 10 }, note: "你不再追逐财务回报的神话，开始用产业逻辑看项目。" },
     ],
@@ -373,9 +373,45 @@ const eventDeck = [
     category: "办公室政治",
     description: "对方暗示，如果你出来做一支小基金，他们愿意做基石出资人。",
     choices: [
-      { text: "婉拒，继续留在平台内打磨业绩", effects: { promotion: 6, network: 4, health: -1 }, note: "你把诱惑放进抽屉里，决定先把当前基金的牌打完。" },
-      { text: "认真聊下去，准备独立募资", effects: { careerExit: "solo", network: 8, health: -2 }, note: "你离开原平台，开始写自己的第一版募资材料。" },
+      { text: "婉拒，继续留在平台内打磨业绩", effects: { career: 6, network: 4, health: -1 }, note: "你把诱惑放进抽屉里，决定先把当前基金的牌打完。" },
+      { text: "认真聊下去，准备独立募资", effects: { careerMove: "solo", aum: 36, network: 8, health: -2 }, note: "你离开原平台，开始写自己的第一版募资材料，第一支小基金也有了基石弹药。" },
     ],
+  },
+];
+
+const careerEventDeck = [
+  {
+    title: "投委会后，管理合伙人单独留下你",
+    category: "职业机会",
+    description: "过去几笔项目的表现开始被内部讨论。这个位置不是进度条攒出来的，而是有人愿意把资源交到你手上。",
+    choices: [
+      { text: "接受晋升，接更多盘子", effects: { careerMove: "partner", aum: 24, network: 6, health: -2 }, note: "你升为合伙人，账上多了一块可调配额度，也多了一串晚上十点后的电话。" },
+      { text: "继续做案子，不急着坐上去", effects: { track: 4, career: 5, health: 2 }, note: "你没有立刻换头衔，但几个关键项目仍然留在你手里。" },
+    ],
+    minYear: 2011,
+    requires: (s) => s.role !== "合伙人" && s.role !== "创始合伙人",
+  },
+  {
+    title: "另一家 VC 递来 Offer",
+    category: "职业机会",
+    description: "他们看中了你的项目判断，也愿意给你更大的出手权限。代价是重新建立内部信任。",
+    choices: [
+      { text: "跳去新平台，换一支基金打", effects: { careerMove: "vc_offer", aum: 34, network: -4, health: 4 }, note: "你换到一家更激进的基金，弹药变多，关系网络却要重新缝合。" },
+      { text: "留下来，用 Offer 换资源", effects: { aum: 12, network: 5, career: 6, health: -1 }, note: "你没有走，但合伙人终于愿意把一部分额度放到你手里。" },
+    ],
+    minYear: 2010,
+    requires: () => true,
+  },
+  {
+    title: "LP 问你要不要自己出来做",
+    category: "职业机会",
+    description: "对方不承诺无限弹药，只承诺一张小支票和几次引荐。真正的风险变成了你的名字。",
+    choices: [
+      { text: "独立出来，成立小基金", effects: { careerMove: "solo", aum: 48, network: 7, health: -4 }, note: "你成了创始合伙人。AUM 不算大，但每一笔投资都真正写着你的名字。" },
+      { text: "先不出来，继续积累退出案例", effects: { track: 5, career: 5, health: 1 }, note: "你把冲动按住，决定等更多项目退出后再谈自己的旗号。" },
+    ],
+    minYear: 2013,
+    requires: (s) => s.track >= 58 || s.network >= 62,
   },
 ];
 
@@ -402,7 +438,7 @@ const endingTitles = [
   { title: "满盘皆输", test: (s) => s.endingReason === "loss_spiral" },
   { title: "创业幕僚", test: (s) => s.careerExit === "corpdev" },
   { title: "产业棋手", test: (s) => s.careerExit === "industry" },
-  { title: "独立掌柜", test: (s) => s.careerExit === "solo" },
+  { title: "独立掌柜", test: (s) => s.role === "创始合伙人" },
   { title: "投资教父", test: (s) => s.track >= 88 && s.aum >= 110 },
   { title: "江湖传说", test: (s) => s.network >= 86 && s.track >= 72 },
   { title: "募资机器", test: (s) => s.aum >= 125 },
@@ -423,8 +459,12 @@ function freshState() {
     track: 50,
     network: 42,
     health: 100,
-    promotion: 0,
+    career: 0,
     careerExit: null,
+    careerEvent: null,
+    careerResult: null,
+    pendingYearAdvance: false,
+    yearsWithoutInvestment: 0,
     endingReason: null,
     selected: [],
     projects: [],
@@ -451,6 +491,10 @@ function money(value) {
   return `${Math.round(value)}M`;
 }
 
+function isPartnerRole() {
+  return state.role === "合伙人" || state.role === "创始合伙人";
+}
+
 function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
@@ -460,13 +504,34 @@ function applyEffects(effects) {
   state.track = clamp(state.track + (effects.track || 0));
   state.network = clamp(state.network + (effects.network || 0));
   state.health = clamp(state.health + (effects.health || 0), 0, 100);
-  state.promotion = clamp(state.promotion + (effects.promotion || 0), 0, 100);
+  state.career = clamp(state.career + (effects.career || 0), 0, 100);
   if (effects.careerExit) state.careerExit = effects.careerExit;
+  if (effects.careerMove) applyCareerMove(effects.careerMove);
+}
+
+function applyCareerMove(move) {
+  if (move === "partner" && state.role !== "合伙人") {
+    state.role = "合伙人";
+    state.partnerYear = state.year + 1;
+    state.career = clamp(state.career + 12, 0, 100);
+    return;
+  }
+  if (move === "vc_offer") {
+    state.role = state.role === "投资经理" ? "投资副总裁" : state.role;
+    state.partnerYear = null;
+    state.career = clamp(state.career + 8, 0, 100);
+    return;
+  }
+  if (move === "solo") {
+    state.role = "创始合伙人";
+    state.partnerYear = state.year + 1;
+    state.career = clamp(state.career + 16, 0, 100);
+  }
 }
 
 function generateProjects() {
   const era = eraFor(state.year);
-  const count = state.role === "合伙人" ? 5 : 3;
+  const count = isPartnerRole() ? 5 : 3;
   const availableSectors = era.available;
   const hotSectors = era.hot.filter((sector) => availableSectors.includes(sector));
   const usedNames = new Set(state.seenCompanies);
@@ -512,17 +577,36 @@ function generateProjects() {
       investorComment: Math.random() < 0.28 ? pick(investorComments.pre) : null,
     });
   }
+  ensureAffordableOpportunity(projects);
   state.seenCompanies = [...new Set([...state.seenCompanies, ...projects.map((project) => project.name)])];
   return projects;
 }
 
+function ensureAffordableOpportunity(projects) {
+  if (state.yearsWithoutInvestment < 1 || state.aum < minInvestmentCheck() || projects.some((project) => project.amount <= state.aum)) return;
+  const project = projects
+    .filter((item) => item.preMoney > minInvestmentCheck())
+    .sort((a, b) => a.amount - b.amount)[0];
+  if (!project) return;
+  const amount = Math.min(Math.floor(state.aum), Math.max(minInvestmentCheck(), Math.floor(project.preMoney * 0.12)));
+  if (amount >= project.preMoney) return;
+  project.amount = amount;
+  project.ownership = amount / (project.preMoney + amount);
+  project.lead = false;
+  project.thesis = `${project.thesis} 这一轮留出了一小块跟投额度，给上一年没有出手的人一点窗口。`;
+}
+
+function minInvestmentCheck() {
+  return isPartnerRole() ? 8 : 5;
+}
+
 function canLeadProject(amount, metrics) {
-  const roleBase = state.role === "合伙人" ? 0.58 : 0.22;
+  const roleBase = isPartnerRole() ? 0.58 : 0.22;
   const capitalFit = state.aum >= amount * 8 ? 0.14 : state.aum >= amount * 5 ? 0.06 : -0.1;
   const relationshipFit = state.network >= 60 ? 0.08 : state.network < 38 ? -0.08 : 0;
   const reputationFit = state.track >= 65 ? 0.06 : state.track < 42 ? -0.06 : 0;
   const dealSizeFit = amount <= 10 ? 0.08 : amount >= 24 ? -0.1 : 0;
-  const hotDealPenalty = metrics.heat > 82 && state.role !== "合伙人" ? -0.08 : 0;
+  const hotDealPenalty = metrics.heat > 82 && !isPartnerRole() ? -0.08 : 0;
   const probability = clamp(roleBase + capitalFit + relationshipFit + reputationFit + dealSizeFit + hotDealPenalty, 0.08, 0.82);
   return Math.random() < probability;
 }
@@ -539,10 +623,10 @@ function buildDealTerms(year, sector, pressure) {
   }[sector];
   const pressureMultiplier = 0.65 + pressure / 65;
   const preMoney = Math.max(12, Math.round(eraBase * sectorMultiplier * pressureMultiplier));
-  const ownership = (state.role === "合伙人" ? rand(12, 25) : rand(10, 20)) / 100;
+  const ownership = (isPartnerRole() ? rand(12, 25) : rand(10, 20)) / 100;
   const rawAmount = Math.round(preMoney * ownership);
-  const maxCheck = Math.max(state.role === "合伙人" ? 30 : 16, Math.floor(state.aum * (state.role === "合伙人" ? 0.34 : 0.3)));
-  const minCheck = state.role === "合伙人" ? 8 : 5;
+  const maxCheck = Math.max(isPartnerRole() ? 30 : 16, Math.floor(state.aum * (isPartnerRole() ? 0.34 : 0.3)));
+  const minCheck = minInvestmentCheck();
   const amount = clamp(rawAmount, minCheck, Math.min(maxCheck, Math.floor(preMoney * 0.28)));
   return { preMoney, amount, ownership: amount / (preMoney + amount) };
 }
@@ -642,10 +726,10 @@ function rand(min, max) {
 }
 
 function startYear() {
-  state.projects = generateProjects();
   state.selected = [];
   state.yearLog = [];
   state.lastResults = matureInvestments();
+  state.projects = generateProjects();
   state.event = Math.random() < 0.62 ? pick(eventDeck) : null;
   state.phase = state.lastResults.length ? "portfolio" : state.event ? "event" : "brief";
   render();
@@ -688,7 +772,7 @@ function matureInvestments() {
       track: outcome === "huge" ? 18 : outcome === "good" ? 9 : outcome === "flat" ? 0 : -12,
       network: outcome === "huge" ? 9 : outcome === "fail" ? -5 : 2,
       health: outcome === "fail" ? -1 : outcome === "huge" ? 2 : 0,
-      promotion: outcome === "huge" ? 20 : outcome === "good" ? 10 : outcome === "flat" ? 2 : -4,
+      career: outcome === "huge" ? 20 : outcome === "good" ? 10 : outcome === "flat" ? 2 : -4,
     });
   });
   return matured;
@@ -704,7 +788,7 @@ function shouldExitInvestment(item) {
 }
 
 function invest(projectId) {
-  const maxDeals = state.role === "合伙人" ? 3 : 1;
+  const maxDeals = isPartnerRole() ? 3 : 1;
   if (state.selected.length >= maxDeals) return;
   const project = state.projects.find((item) => item.id === projectId);
   if (!project || state.aum < project.amount) return;
@@ -712,7 +796,7 @@ function invest(projectId) {
   state.aum = clamp(state.aum - project.amount);
   const pressure = dealPressureEvent(project);
   if (pressure) state.health = clamp(state.health - pressure.value, 0, 100);
-  state.promotion = clamp(state.promotion + (project.lead ? 3 : 1), 0, 100);
+  state.career = clamp(state.career + (project.lead ? 3 : 1), 0, 100);
   state.investments.push({
     ...project,
     year: state.year,
@@ -763,12 +847,12 @@ function snapshotMetrics() {
     track: Math.round(state.track),
     network: Math.round(state.network),
     health: Math.round(state.health),
-    promotion: Math.round(state.promotion),
+    career: Math.round(state.career),
   };
 }
 
 function metricChanges(before, after) {
-  const labels = { aum: "AUM", track: "业绩", network: "关系", health: "健康", promotion: "升职进度" };
+  const labels = { aum: "AUM", track: "业绩", network: "关系", health: "健康", career: "职业筹码" };
   return Object.keys(labels)
     .map((key) => ({ key, label: labels[key], before: before[key], after: after[key], delta: after[key] - before[key] }))
     .filter((item) => item.delta !== 0);
@@ -790,12 +874,14 @@ function advanceYear() {
   const healthCosts = healthCostBreakdown(invested, pending);
   const annualBurn = healthCosts.reduce((sum, item) => sum + item.value, 0);
   state.health = clamp(state.health - annualBurn, 0, 100);
+  const funding = annualFundingChange(invested);
+  if (funding.value !== 0) applyEffects({ aum: funding.value });
+  state.yearsWithoutInvestment = invested.length ? 0 : state.yearsWithoutInvestment + 1;
   state.lastHealthNote = annualBurn > 0 ? {
     year: state.year,
     burn: annualBurn,
     reasons: healthCosts.map((item) => item.reason),
   } : null;
-  state.aum = clamp(state.aum + (state.track - 50) * 0.08 + (state.network - 45) * 0.06 - (state.health < 30 ? 4 : 0));
   state.chronicle.push({
     year: state.year,
     era: era.name,
@@ -803,6 +889,7 @@ function advanceYear() {
       `${era.name}：${era.theme}`,
       ...state.yearLog,
       invested.length ? `这一年新增 ${invested.length} 笔投资。` : "这一年你没有出手，把判断留给了下一年。",
+      funding.reason,
       annualBurn > 0 ? `健康 -${annualBurn}：${healthCosts.map((item) => item.reason).join("；")}。` : "这一年你难得把节奏放慢，身体没有继续透支。",
     ],
   });
@@ -813,6 +900,19 @@ function advanceYear() {
     return;
   }
 
+  const careerEvent = rollCareerEvent();
+  if (careerEvent) {
+    state.event = careerEvent;
+    state.pendingYearAdvance = true;
+    state.phase = "event";
+    render();
+    return;
+  }
+
+  continueToNextYearOrEnd();
+}
+
+function continueToNextYearOrEnd() {
   const endReason = terminalReason();
   if (endReason) {
     state.endingReason = endReason;
@@ -820,15 +920,6 @@ function advanceYear() {
     render();
     return;
   }
-
-  if (state.role !== "合伙人" && shouldPromote()) {
-    state.role = "合伙人";
-    state.partnerYear = state.year + 1;
-    state.phase = "promotion";
-    render();
-    return;
-  }
-
   if (state.year >= END_YEAR || state.health <= 0) {
     if (state.health <= 0) state.endingReason = "health";
     state.phase = "ending";
@@ -840,11 +931,39 @@ function advanceYear() {
   startYear();
 }
 
+function annualFundingChange(invested) {
+  let value = Math.round((state.track - 50) * 0.1 + (state.network - 45) * 0.08 - (state.health < 30 ? 4 : 0));
+  const notes = [];
+  if (value > 0) notes.push(`业绩和关系带来 LP 信任，AUM +${value}`);
+  if (value < 0) notes.push(`募资口碑承压，AUM ${value}`);
+  if (state.aum < 22 && (state.track >= 58 || state.network >= 62)) {
+    const bridge = rand(8, 16);
+    value += bridge;
+    notes.push(`账上偏紧，但过往判断还被认可，平台追加保留额度 AUM +${bridge}`);
+  }
+  if (!invested.length && state.aum < 18 && state.network >= 50) {
+    const reserve = rand(4, 10);
+    value += reserve;
+    notes.push(`你没有乱投，反而争取到一笔小额机动资金 AUM +${reserve}`);
+  }
+  if (!notes.length) return { value: 0, reason: "LP 和平台没有明显追加，也没有继续收紧弹药。" };
+  return { value, reason: `${notes.join("；")}。` };
+}
+
+function rollCareerEvent() {
+  if (state.year < 2010) return null;
+  const successCount = state.investments.filter((item) => item.outcome === "huge" || item.outcome === "good").length;
+  const chance = clamp(0.04 + Math.max(0, state.track - 50) * 0.006 + Math.max(0, state.network - 45) * 0.004 + state.career * 0.004 + successCount * 0.025, 0.04, 0.48);
+  if (Math.random() > chance) return null;
+  const candidates = careerEventDeck.filter((event) => state.year >= event.minYear && event.requires(state));
+  return candidates.length ? pick(candidates) : null;
+}
+
 function terminalReason() {
   const pending = state.investments.filter((item) => item.status === "pending").length;
   const failures = state.investments.filter((item) => item.outcome === "fail").length;
   const resolved = state.investments.filter((item) => item.status === "resolved").length;
-  if (state.aum < 6 && pending === 0) return "aum_depleted";
+  if (state.aum < minInvestmentCheck() + 1 && pending === 0) return "aum_depleted";
   if (resolved >= 4 && failures >= Math.max(4, Math.ceil(resolved * 0.8)) && state.track < 30) return "loss_spiral";
   return null;
 }
@@ -852,11 +971,11 @@ function terminalReason() {
 function healthCostBreakdown(invested, pending) {
   const costs = [];
   costs.push({
-    value: state.role === "合伙人" ? 1 : 0,
-    reason: state.role === "合伙人" ? "合伙人会、LP 沟通和团队管理占掉精力" : "项目会、周报和合伙人追问带来基础消耗",
+    value: isPartnerRole() ? 1 : 0,
+    reason: isPartnerRole() ? "合伙人会、LP 沟通和团队管理占掉精力" : "项目会、周报和合伙人追问带来基础消耗",
   });
   if (invested.length) {
-    const dealCost = state.role === "合伙人" && invested.length >= 3 ? 1 : 0;
+    const dealCost = isPartnerRole() && invested.length >= 3 ? 1 : 0;
     if (dealCost > 0) {
       costs.push({
         value: dealCost,
@@ -880,11 +999,6 @@ function healthCostBreakdown(invested, pending) {
     costs.push({ value: 2, reason: "近期业绩不好，每次复盘都像重新拆一遍伤口" });
   }
   return costs;
-}
-
-function shouldPromote() {
-  const successfulDeals = state.investments.filter((item) => item.outcome === "huge" || item.outcome === "good").length;
-  return state.year >= 2011 && state.promotion >= 70 && successfulDeals >= 2 && (state.track >= 58 || state.network >= 68);
 }
 
 function restart() {
@@ -912,6 +1026,7 @@ function careerEndingLine() {
   if (state.careerExit === "corpdev") return "你没有继续留在基金，而是转去企业做战略投资，开始用另一种方式理解资本。";
   if (state.careerExit === "industry") return "你离开财务投资路径，进入产业方，项目不再只是回报曲线，也是业务拼图。";
   if (state.careerExit === "solo") return "你离开原平台，开始独立募资。没有大机构的光环，也没有大机构的保护。";
+  if (state.role === "创始合伙人") return `你在 ${state.partnerYear} 年独立出来做自己的基金，开始同时管理项目、LP 和机构声誉。`;
   if (state.role === "合伙人") return `你在 ${state.partnerYear} 年升为合伙人，终于从看项目的人变成分配资源的人。`;
   if (state.health <= 20) return "你的身体比投资组合更早发出预警，最后你选择停下来。";
   return "你没有成为最响亮的人，但你在漫长周期里留下了自己的判断。";
@@ -936,7 +1051,7 @@ function worstInvestment() {
 }
 
 function shell(content) {
-  const roleLine = state.role === "合伙人" && state.partnerYear ? `${state.role} · ${state.partnerYear} 年晋升` : state.role;
+  const roleLine = isPartnerRole() && state.partnerYear ? `${state.role} · ${state.partnerYear} 年开始` : state.role;
   return `
     <section class="screen">
       <header class="topbar">
@@ -948,7 +1063,6 @@ function shell(content) {
           ${meter("AUM", Math.round(state.aum))}
           ${meter("业绩", Math.round(state.track))}
           ${meter("关系", Math.round(state.network))}
-          ${meter("升职", Math.round(state.promotion))}
           ${meter("健康", Math.round(state.health), state.health < 30 ? "danger" : "")}
         </div>
       </header>
@@ -986,7 +1100,7 @@ function renderBrief() {
         <div class="brief-grid">
           <div class="brief-item"><span>热门赛道</span><strong>${era.hot.map((key) => sectors[key]).join(" / ")}</strong></div>
           <div class="brief-item"><span>市场状态</span><strong>${marketMood}</strong></div>
-          <div class="brief-item"><span>今年权限</span><strong>${state.role === "合伙人" ? "最多 3 笔" : "最多 1 笔"}</strong></div>
+          <div class="brief-item"><span>今年权限</span><strong>${isPartnerRole() ? "最多 3 笔" : "最多 1 笔"}</strong></div>
         </div>
         ${state.lastHealthNote ? `<div class="health-note"><strong>${state.lastHealthNote.year} 年健康 -${state.lastHealthNote.burn}</strong><br>${state.lastHealthNote.reasons.join("；")}。</div>` : ""}
         <button class="btn" data-action="projects">进入项目会</button>
@@ -997,7 +1111,7 @@ function renderBrief() {
 }
 
 function renderProjects() {
-  const maxDeals = state.role === "合伙人" ? 3 : 1;
+  const maxDeals = isPartnerRole() ? 3 : 1;
   return shell(`
     <div class="layout">
       <section class="panel plain">
@@ -1217,6 +1331,7 @@ document.addEventListener("click", (event) => {
   const action = target.dataset.action;
   if (action === "start") startYear();
   if (action === "projects") {
+    ensureAffordableOpportunity(state.projects);
     state.phase = "projects";
     render();
   }
@@ -1226,10 +1341,22 @@ document.addEventListener("click", (event) => {
   if (action === "choice") resolveEvent(Number(target.dataset.index));
   if (action === "continueEvent") {
     state.eventResult = null;
-    state.phase = state.careerExit ? "ending" : "brief";
+    if (state.careerExit) {
+      state.phase = "ending";
+      render();
+      return;
+    }
+    if (state.pendingYearAdvance) {
+      state.pendingYearAdvance = false;
+      continueToNextYearOrEnd();
+      return;
+    }
+    ensureAffordableOpportunity(state.projects);
+    state.phase = "brief";
     render();
   }
   if (action === "afterPortfolio") {
+    ensureAffordableOpportunity(state.projects);
     state.phase = state.event ? "event" : "brief";
     render();
   }
