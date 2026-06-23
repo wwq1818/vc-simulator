@@ -14,8 +14,8 @@ const eras = [
   {
     from: 2005,
     to: 2009,
-    name: "门户余温",
-    theme: "美元基金仍在讲中国互联网的增长故事，移动互联网还只是会议上的词。",
+    name: "门户余温：第一代流量生意还在发热",
+    theme: "中国互联网还在从门户、搜索、分类信息和垂直社区里寻找商业化路径。美元基金相信中国会复制一遍美国互联网故事，但移动互联网还没有真正到来，很多项目的增长来自广告位、会员置顶、线下代理和早期流量红利。",
     hot: ["internet", "consumer"],
     available: ["internet", "consumer", "healthcare"],
     risk: 42,
@@ -23,8 +23,8 @@ const eras = [
   {
     from: 2010,
     to: 2014,
-    name: "移动狂飙",
-    theme: "智能手机铺开，流量、团购、O2O 和平台梦让每个 BP 都像一张船票。",
+    name: "移动狂飙：每块手机屏幕都像新入口",
+    theme: "智能手机开始普及，App 成了新的入口。团购、O2O、本地生活、移动广告和社交产品一起涌进项目会，创始人讲的是装机量、日活、地推效率和平台梦，资本也开始相信速度本身就是壁垒。",
     hot: ["internet", "consumer", "healthcare"],
     available: ["internet", "consumer", "healthcare", "hardtech"],
     risk: 55,
@@ -32,8 +32,8 @@ const eras = [
   {
     from: 2015,
     to: 2019,
-    name: "独角兽泡沫",
-    theme: "估值上天，速度压倒一切。你开始怀疑自己是在投资，还是在抢座。",
+    name: "独角兽泡沫：估值跑在商业模式前面",
+    theme: "移动互联网红利进入后半场，资本、补贴和增长故事一起把估值推高。新消费、医疗服务、新能源和平台型公司轮番成为热门，项目会里最常见的词是下一轮、头部基金、独角兽和抢额度。",
     hot: ["consumer", "healthcare", "energy"],
     available: ["internet", "consumer", "healthcare", "hardtech", "energy"],
     risk: 68,
@@ -41,8 +41,8 @@ const eras = [
   {
     from: 2020,
     to: 2024,
-    name: "硬科技转向",
-    theme: "资本更耐心，也更挑剔。国产替代、能源变革和 AI 成了新的叙事中心。",
+    name: "硬科技转向：故事必须走进工厂和产线",
+    theme: "流量故事降温，资本开始把注意力转向国产替代、新能源、先进制造、医疗器械和 AI。项目不再只看增长曲线，还要看良率、订单、交付周期、供应链安全和真实毛利。",
     hot: ["hardtech", "energy", "ai"],
     available: ["internet", "consumer", "healthcare", "hardtech", "energy", "ai"],
     risk: 62,

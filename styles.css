@@ -576,15 +576,16 @@ h3 {
 
 .era-title {
   margin-bottom: 14px;
-  font-size: clamp(42px, 6vw, 72px);
-  line-height: 0.98;
+  max-width: 860px;
+  font-size: clamp(30px, 4.6vw, 52px);
+  line-height: 1.16;
 }
 
 .era-theme {
-  max-width: 720px;
+  max-width: 880px;
   color: #314253;
-  font-size: 17px;
-  line-height: 1.85;
+  font-size: 16px;
+  line-height: 1.9;
 }
 
 .era-stamp {
