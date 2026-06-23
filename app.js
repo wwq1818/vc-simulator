@@ -1,5 +1,6 @@
 const START_YEAR = 2005;
 const END_YEAR = 2024;
+const MAX_AUM = 9999;
 
 const sectors = {
   internet: "互联网",
@@ -1304,7 +1305,7 @@ function investorCommentFor(phase, year) {
 }
 
 function applyEffects(effects) {
-  state.aum = clamp(state.aum + (effects.aum || 0), 0, 300);
+  state.aum = clamp(state.aum + (effects.aum || 0), 0, MAX_AUM);
   state.track = clamp(state.track + (effects.track || 0));
   state.network = clamp(state.network + (effects.network || 0));
   state.health = clamp(state.health + (effects.health || 0), 0, 100);
@@ -1712,7 +1713,7 @@ function invest(projectId) {
   const project = state.projects.find((item) => item.id === projectId);
   if (!project || state.aum < project.amount) return;
   state.selected.push(projectId);
-  state.aum = clamp(state.aum - project.amount);
+  state.aum = clamp(state.aum - project.amount, 0, MAX_AUM);
   const pressure = dealPressureEvent(project);
   if (pressure) state.health = clamp(state.health - pressure.value, 0, 100);
   state.career = clamp(state.career + (project.lead ? 3 : 1), 0, 100);
