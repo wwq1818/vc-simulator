@@ -51,91 +51,91 @@ const eras = [
 
 const companyCatalogSeed = {
   internet: [
-    { name: "大众点评", from: 2005, to: 2010 },
-    { name: "赶集网", from: 2005, to: 2011 },
-    { name: "58同城", from: 2005, to: 2012 },
-    { name: "土豆网", from: 2005, to: 2010 },
-    { name: "去哪儿", from: 2006, to: 2012 },
-    { name: "汽车之家", from: 2007, to: 2013 },
-    { name: "美团", from: 2010, to: 2015 },
-    { name: "字节跳动", from: 2012, to: 2018 },
-    { name: "滴滴出行", from: 2013, to: 2018 },
-    { name: "快手", from: 2013, to: 2019 },
-    { name: "拼多多", from: 2015, to: 2019 },
-    { name: "小红书", from: 2014, to: 2021 },
+    { name: "邻桌点评", from: 2005, to: 2010 },
+    { name: "集市口岸", from: 2005, to: 2011 },
+    { name: "五八街区", from: 2005, to: 2012 },
+    { name: "番薯视频", from: 2005, to: 2010 },
+    { name: "云程票务", from: 2006, to: 2012 },
+    { name: "车库之家", from: 2007, to: 2013 },
+    { name: "饭团到店", from: 2010, to: 2015 },
+    { name: "节拍引擎", from: 2012, to: 2018 },
+    { name: "橙点出行", from: 2013, to: 2018 },
+    { name: "闪影社区", from: 2013, to: 2019 },
+    { name: "团团优选", from: 2015, to: 2019 },
+    { name: "小薯笔记", from: 2014, to: 2021 },
   ],
   consumer: [
-    { name: "三只松鼠", from: 2012, to: 2017 },
-    { name: "良品铺子", from: 2010, to: 2016 },
-    { name: "江小白", from: 2012, to: 2018 },
-    { name: "喜茶", from: 2016, to: 2021 },
-    { name: "元气森林", from: 2016, to: 2022 },
-    { name: "泡泡玛特", from: 2016, to: 2020 },
-    { name: "瑞幸咖啡", from: 2017, to: 2020 },
-    { name: "完美日记", from: 2017, to: 2021 },
+    { name: "三颗榛子", from: 2012, to: 2017 },
+    { name: "好物巷口", from: 2010, to: 2016 },
+    { name: "江畔小酒", from: 2012, to: 2018 },
+    { name: "喜枝茶铺", from: 2016, to: 2021 },
+    { name: "醒气森林", from: 2016, to: 2022 },
+    { name: "泡泡星球", from: 2016, to: 2020 },
+    { name: "驼鹿咖啡", from: 2017, to: 2020 },
+    { name: "白昼日记", from: 2017, to: 2021 },
   ],
   hardtech: [
-    { name: "大疆创新", from: 2010, to: 2016 },
-    { name: "商汤科技", from: 2014, to: 2019 },
-    { name: "寒武纪", from: 2016, to: 2020 },
-    { name: "地平线", from: 2016, to: 2022 },
-    { name: "优必选", from: 2015, to: 2021 },
-    { name: "禾赛科技", from: 2015, to: 2022 },
-    { name: "云从科技", from: 2015, to: 2020 },
+    { name: "穹翼创新", from: 2010, to: 2016 },
+    { name: "商澜视觉", from: 2014, to: 2019 },
+    { name: "古核智能", from: 2016, to: 2020 },
+    { name: "地界算法", from: 2016, to: 2022 },
+    { name: "优选机器人", from: 2015, to: 2021 },
+    { name: "禾岭传感", from: 2015, to: 2022 },
+    { name: "云侧科技", from: 2015, to: 2020 },
   ],
   healthcare: [
-    { name: "微医", from: 2010, to: 2017 },
-    { name: "丁香园", from: 2008, to: 2016 },
-    { name: "春雨医生", from: 2011, to: 2016 },
-    { name: "药明康德", from: 2005, to: 2010 },
-    { name: "百济神州", from: 2013, to: 2018 },
-    { name: "信达生物", from: 2014, to: 2019 },
-    { name: "联影医疗", from: 2013, to: 2019 },
-    { name: "平安好医生", from: 2015, to: 2018 },
+    { name: "微诊云", from: 2010, to: 2017 },
+    { name: "紫藤医生", from: 2008, to: 2016 },
+    { name: "春潮问诊", from: 2011, to: 2016 },
+    { name: "药澈实验", from: 2005, to: 2010 },
+    { name: "百川药研", from: 2013, to: 2018 },
+    { name: "信桥生物", from: 2014, to: 2019 },
+    { name: "联岳影像", from: 2013, to: 2019 },
+    { name: "安诊医生", from: 2015, to: 2018 },
   ],
   energy: [
-    { name: "宁德时代", from: 2015, to: 2018 },
-    { name: "蔚来汽车", from: 2015, to: 2020 },
-    { name: "小鹏汽车", from: 2016, to: 2020 },
-    { name: "理想汽车", from: 2016, to: 2020 },
-    { name: "蜂巢能源", from: 2018, to: 2024 },
-    { name: "远景动力", from: 2018, to: 2024 },
+    { name: "宁川电池", from: 2015, to: 2018 },
+    { name: "蔚蓝车联", from: 2015, to: 2020 },
+    { name: "小翼汽车", from: 2016, to: 2020 },
+    { name: "理成汽车", from: 2016, to: 2020 },
+    { name: "蜂格能源", from: 2018, to: 2024 },
+    { name: "远岚动力", from: 2018, to: 2024 },
   ],
   ai: [
-    { name: "智谱AI", from: 2020, to: 2024 },
-    { name: "月之暗面", from: 2023, to: 2024 },
-    { name: "MiniMax", from: 2022, to: 2024 },
-    { name: "百川智能", from: 2023, to: 2024 },
-    { name: "阶跃星辰", from: 2023, to: 2024 },
-    { name: "零一万物", from: 2023, to: 2024 },
+    { name: "智页模型", from: 2020, to: 2024 },
+    { name: "月背智能", from: 2023, to: 2024 },
+    { name: "迷你极大", from: 2022, to: 2024 },
+    { name: "百涧智能", from: 2023, to: 2024 },
+    { name: "跃迁星河", from: 2023, to: 2024 },
+    { name: "壹元万象", from: 2023, to: 2024 },
   ],
 };
 
-const companyNameParts = {
-  internet: {
-    prefixes: ["易车", "快看", "同城", "乐享", "美邻", "淘房", "云店", "微票", "优选", "闪送", "趣玩", "即刻", "多点", "小站", "优客", "掌上"],
-    suffixes: ["网", "科技", "信息", "互动", "在线", "数据", "互联", "生活"],
-  },
-  consumer: {
-    prefixes: ["每日", "好邻", "熊猫", "鲜橙", "小鹿", "茶里", "食尚", "有家", "轻食", "潮玩", "花点", "盒子", "好麦", "乐饮", "邻几", "青柠"],
-    suffixes: ["优选", "食品", "生活", "零售", "茶饮", "便利", "家居", "品牌"],
-  },
-  hardtech: {
-    prefixes: ["中科", "华芯", "深鉴", "云迹", "速腾", "镭神", "极智", "星河", "睿创", "图灵", "黑芝麻", "智行", "灵动", "越疆", "梅卡曼德", "矩阵"],
-    suffixes: ["科技", "智能", "机器人", "光电", "芯片", "传感", "智造", "自动化"],
-  },
-  healthcare: {
-    prefixes: ["健客", "康宁", "医联", "微脉", "燃石", "诺辉", "推想", "深睿", "圆心", "思派", "和铂", "康方", "亚盛", "再鼎", "嘉和", "华大"],
-    suffixes: ["医疗", "健康", "生物", "医药", "影像", "检验", "诊疗", "器械"],
-  },
-  energy: {
-    prefixes: ["星源", "中创新航", "国轩", "欣旺达", "亿纬", "蜂巢", "瑞浦", "鹏辉", "特来电", "星星", "远景", "正力", "海辰", "清陶", "卫蓝", "协鑫"],
-    suffixes: ["能源", "动力", "电池", "储能", "材料", "充电", "光伏", "电气"],
-  },
-  ai: {
-    prefixes: ["深言", "澜舟", "面壁", "生数", "无问", "出门问问", "第四范式", "达观", "竹间", "云知声", "思必驰", "明略", "海天瑞声", "影刀", "实在", "来也"],
-    suffixes: ["智能", "科技", "数据", "算法", "模型", "认知", "算力", "AI"],
-  },
+const companyNamePool = {
+  internet: [
+    "米仓网", "后巷生活", "车影阁", "云程票夹", "章鱼街", "同桌地图", "灰鲸社区", "橙子日历", "票根儿", "饭点地图", "旧书海岸",
+    "风筝旅行", "小站台", "星火论坛", "口袋账本", "梨花直播", "南窗视频", "几何招聘", "浮标数据", "巷口到家", "松果协同", "蓝页办公",
+  ],
+  consumer: [
+    "大米公司", "月台便当", "鹿角杯", "青柚铺", "好麦田", "晚风小酒", "驼鹿咖啡", "三颗榛子", "小满茶事", "白昼日记", "醒气森林",
+    "泡泡星球", "一笼半", "竹盐厨房", "云朵便利", "花点集", "小岛香氛", "盐粒零食", "北巷面包", "半糖盒子", "山谷酸奶", "暖锅计划",
+  ],
+  hardtech: [
+    "砺芯", "穹翼创新", "商澜视觉", "古核智能", "地界算法", "禾岭传感", "云侧科技", "灰塔机器人", "白盒光电", "矩阵谷", "镭舟",
+    "灵机塔", "黑曜谷", "越岭自动化", "梅卡方舟", "星河坞", "睿垣智造", "纸鸢无人机", "铜雀芯片", "山海传感", "北斗工坊", "长桥光子",
+  ],
+  healthcare: [
+    "紫藤医生", "春潮问诊", "药澈实验", "百川药研", "信桥生物", "联岳影像", "安诊医生", "圆术方", "康岚堂", "微澜脉", "燃岩生物",
+    "诺晖石", "深眸影像", "思衡岛", "和璞湾", "康序坊", "亚岭医药", "再启仓", "嘉源台", "华谱线", "白塔检验", "松针诊疗",
+  ],
+  energy: [
+    "宁川电池", "蔚蓝车联", "小翼汽车", "理成汽车", "蜂格能源", "远岚动力", "星澈井", "衡航湾", "国衡塔", "欣曜谷", "亿维方",
+    "瑞澜池", "鹏曜线", "特能站", "星缆网", "正澈源", "海辰湾", "清陶谷", "卫蓝桥", "协曜场", "银桦储能", "山海充电",
+  ],
+  ai: [
+    "智页模型", "月背智能", "迷你极大", "百涧智能", "跃迁星河", "壹元万象", "深页", "岚舟", "灰墙", "数生花", "无问塔",
+    "问路星", "第四象限", "远观台", "竹影灯", "云弦", "思驰", "明策图", "海声", "影刃", "实境", "来因",
+  ],
 };
 
 function buildCompanyCatalog(seedCatalog) {
@@ -164,16 +164,10 @@ function buildCompanyCatalog(seedCatalog) {
 }
 
 function generateCompanies(sector, windows, targetCount) {
-  const parts = companyNameParts[sector];
-  const companies = [];
-  for (const prefix of parts.prefixes) {
-    for (const suffix of parts.suffixes) {
-      if (companies.length >= targetCount) return companies;
-      const window = windows[companies.length % windows.length];
-      companies.push({ name: `${prefix}${suffix}`, from: window[0], to: window[1] });
-    }
-  }
-  return companies;
+  return companyNamePool[sector].slice(0, targetCount).map((name, index) => {
+    const window = windows[index % windows.length];
+    return { name, from: window[0], to: window[1] };
+  });
 }
 
 const companyCatalog = buildCompanyCatalog(companyCatalogSeed);
@@ -1549,6 +1543,13 @@ function startYear() {
   state.yearLog = [];
   state.lastResults = matureInvestments();
   state.projects = generateProjects();
+  const startReason = terminalReason();
+  if (startReason) {
+    state.endingReason = startReason;
+    state.phase = "ending";
+    render();
+    return;
+  }
   state.event = Math.random() < 0.62 ? pickYearEvent() : null;
   state.phase = state.lastResults.length ? "portfolio" : state.event ? "event" : "brief";
   render();
@@ -1771,7 +1772,7 @@ function snapshotMetrics() {
 }
 
 function metricChanges(before, after) {
-  const labels = { aum: "AUM", track: "业绩", network: "关系", health: "健康", career: "职业筹码" };
+  const labels = { aum: "AUM", track: "业绩", network: "关系", health: "健康" };
   return Object.keys(labels)
     .map((key) => ({ key, label: labels[key], before: before[key], after: after[key], delta: after[key] - before[key] }))
     .filter((item) => item.delta !== 0);
@@ -1832,6 +1833,14 @@ function advanceYear() {
 }
 
 function continueToNextYearOrEnd() {
+  if (state.year >= END_YEAR || state.health <= 0) {
+    if (state.year >= END_YEAR) settleFinalPortfolio();
+    if (state.health <= 0) state.endingReason = "health";
+    state.phase = "ending";
+    render();
+    return;
+  }
+
   const endReason = terminalReason();
   if (endReason) {
     state.endingReason = endReason;
@@ -1839,15 +1848,19 @@ function continueToNextYearOrEnd() {
     render();
     return;
   }
-  if (state.year >= END_YEAR || state.health <= 0) {
-    if (state.health <= 0) state.endingReason = "health";
-    state.phase = "ending";
-    render();
-    return;
-  }
 
   state.year += 1;
   startYear();
+}
+
+function settleFinalPortfolio() {
+  const settled = matureInvestments();
+  if (!settled.length) return;
+  const cashBack = settled.reduce((sum, item) => sum + (item.aumReturn || 0), 0);
+  const summary = `2024 年底清算组合：${settled.length} 个未退出项目按当年市场窗口完成结算，AUM 回收 ${money(cashBack)}。`;
+  state.yearLog.push(summary);
+  const lastYear = state.chronicle[state.chronicle.length - 1];
+  if (lastYear && lastYear.year === state.year) lastYear.lines.push(summary);
 }
 
 function annualFundingChange(invested) {
@@ -1895,6 +1908,7 @@ function terminalReason() {
   const pending = state.investments.filter((item) => item.status === "pending").length;
   const failures = state.investments.filter((item) => item.outcome === "fail").length;
   const resolved = state.investments.filter((item) => item.status === "resolved").length;
+  if (state.aum < minInvestmentCheck()) return "aum_depleted";
   if (state.aum < minInvestmentCheck() + 1 && pending === 0) return "aum_depleted";
   if (resolved >= 4 && failures >= Math.max(4, Math.ceil(resolved * 0.8)) && state.track < 30) return "loss_spiral";
   return null;
@@ -2083,19 +2097,28 @@ function renderTitle() {
 
 function renderBrief() {
   const era = eraFor(state.year);
+  const visual = eraVisual(era);
   const marketMood = era.risk > 64 ? "亢奋且拥挤" : era.risk > 52 ? "机会很多，价格不低" : "仍在寻找共识";
   return shell(`
     <div class="layout">
-      <section class="panel">
-        <p class="eyebrow">Market Brief</p>
-        <h2>${era.name}</h2>
-        <p class="copy">${era.theme}</p>
-        <div class="brief-grid">
-          <div class="brief-item"><span>热门赛道</span><strong>${era.hot.map((key) => sectors[key]).join(" / ")}</strong></div>
-          <div class="brief-item"><span>市场状态</span><strong>${marketMood}</strong></div>
-          <div class="brief-item"><span>今年权限</span><strong>${isPartnerRole() ? "最多 3 笔" : "最多 1 笔"}</strong></div>
+      <section class="panel market-brief ${visual.cls}">
+        <div class="era-cover">
+          <div>
+            <p class="eyebrow">Market Brief · ${era.from}-${era.to}</p>
+            <h2 class="era-title">${era.name}</h2>
+            <p class="copy era-theme">${era.theme}</p>
+          </div>
+          <div class="era-stamp" aria-hidden="true">${visual.stamp}</div>
         </div>
-        ${state.lastHealthNote ? `<div class="health-note"><strong>${state.lastHealthNote.year} 年健康 -${state.lastHealthNote.burn}</strong><br>${state.lastHealthNote.reasons.join("；")}。</div>` : ""}
+        <div class="era-keywords" aria-label="时代关键词">
+          ${visual.keywords.map((word) => `<span>${word}</span>`).join("")}
+        </div>
+        <div class="signal-grid">
+          <div class="signal-card"><span>风口</span><strong>${era.hot.map((key) => sectors[key]).join(" / ")}</strong><small>${visual.signal}</small></div>
+          <div class="signal-card"><span>资金情绪</span><strong>${marketMood}</strong><small>${visual.capital}</small></div>
+          <div class="signal-card"><span>你的权限</span><strong>${isPartnerRole() ? "最多 3 笔" : "最多 1 笔"}</strong><small>${isPartnerRole() ? "合伙人可以多押几张票" : "投资经理要先学会只选一张票"}</small></div>
+        </div>
+        ${state.lastHealthNote ? `<div class="health-note"><span>年度代价</span><strong>${state.lastHealthNote.year} 年健康 -${state.lastHealthNote.burn}</strong><br>${state.lastHealthNote.reasons.join("；")}。</div>` : ""}
         <button class="btn" data-action="projects">进入项目会</button>
       </section>
       ${renderSide()}
@@ -2103,14 +2126,67 @@ function renderBrief() {
   `);
 }
 
+function eraVisual(era) {
+  if (era.from <= 2005) {
+    return {
+      cls: "era-portal",
+      stamp: "BP",
+      keywords: ["门户", "美元基金", "分类信息", "纸质 BP"],
+      signal: "流量入口还在野蛮生长",
+      capital: "钱开始进来，但共识还没完全形成",
+    };
+  }
+  if (era.from <= 2010) {
+    return {
+      cls: "era-mobile",
+      stamp: "APP",
+      keywords: ["智能手机", "团购", "O2O", "平台梦"],
+      signal: "每个入口都想变成下一张船票",
+      capital: "交易很快，价格也开始被速度推高",
+    };
+  }
+  if (era.from <= 2015) {
+    return {
+      cls: "era-unicorn",
+      stamp: "TS",
+      keywords: ["独角兽", "补贴", "融资发布", "抢额度"],
+      signal: "项目会里最贵的是错过的焦虑",
+      capital: "热钱拥挤，条款开始让位于速度",
+    };
+  }
+  return {
+    cls: "era-hardtech",
+    stamp: "LAB",
+    keywords: ["国产替代", "新能源", "硬科技", "AI"],
+    signal: "叙事从流量转向工程和交付",
+    capital: "钱更谨慎，但仍愿意为确定性排队",
+  };
+}
+
 function renderProjects() {
   const maxDeals = isPartnerRole() ? 3 : 1;
+  const era = eraFor(state.year);
+  const visual = eraVisual(era);
+  const room = committeeRoomCopy(era, maxDeals);
   return shell(`
     <div class="layout">
-      <section class="panel plain">
-        <p class="eyebrow">Investment Committee</p>
-        <h2>今年你能看到的项目</h2>
-        <p class="copy">今年项目会拿到了 ${state.projects.length} 个新公司，你已经选择 ${state.selected.length}/${maxDeals} 笔。项目不会给出确定答案，只给出足够让人犹豫的信号。</p>
+      <section class="panel plain committee-panel ${visual.cls}">
+        <div class="committee-head">
+          <div>
+            <p class="eyebrow">Investment Committee · ${state.year}</p>
+            <h2>${room.title}</h2>
+            <p class="copy">${room.copy}</p>
+          </div>
+          <div class="committee-ticket" aria-hidden="true">
+            <span>${visual.stamp}</span>
+            <strong>${state.projects.length}</strong>
+            <small>NEW DEALS</small>
+          </div>
+        </div>
+        <div class="deal-room-tags">
+          ${room.tags.map((tag) => `<span>${tag}</span>`).join("")}
+        </div>
+        <p class="copy committee-note">今年项目会拿到了 ${state.projects.length} 个新公司，你已经选择 ${state.selected.length}/${maxDeals} 笔。${room.note}</p>
         <div class="project-list">
           ${state.projects.length ? state.projects.map((project) => renderProject(project, maxDeals)).join("") : `<div class="log-item">这一年没有新的可投公司进入你的视野。市场有时候不是热闹，而是安静。</div>`}
         </div>
@@ -2121,6 +2197,40 @@ function renderProjects() {
       ${renderSide()}
     </div>
   `);
+}
+
+function committeeRoomCopy(era, maxDeals) {
+  const limit = maxDeals === 1 ? "你只有一张票，投出去就要背很久。" : `你最多能投 ${maxDeals} 笔，但每一笔都会进入你的组合记忆。`;
+  if (era.from <= 2005) {
+    return {
+      title: "BP 摞在会议桌上",
+      copy: `创始人带着打印材料、流量截图和一个很大的中国市场故事来见你。${limit}`,
+      note: "项目不会给出确定答案，只会留下足够多的访谈对象、渠道电话和创始人眼神。",
+      tags: ["纸质 BP", "门户流量", "线下代理", "美元基金"],
+    };
+  }
+  if (era.from <= 2010) {
+    return {
+      title: "手机屏幕里全是入口",
+      copy: `App、团购、O2O 和平台梦挤进同一间会议室，每个 BP 都在证明自己能拿到下一批用户。${limit}`,
+      note: "这几年最危险的不是看不懂项目，而是被速度推着替别人完成信仰充值。",
+      tags: ["装机量", "地推", "补贴", "商户 BD"],
+    };
+  }
+  if (era.from <= 2015) {
+    return {
+      title: "TS 比咖啡来得还快",
+      copy: `估值、增速和融资窗口同时被推高，项目会像一场关于错过的集体焦虑。${limit}`,
+      note: "真正难的是分清楚公司在长大，还是市场只是在给它更贵的标签。",
+      tags: ["抢额度", "独角兽", "补贴战", "下一轮估值"],
+    };
+  }
+  return {
+    title: "实验室、工厂和模型一起进场",
+    copy: `硬科技、新能源和 AI 项目把尽调拖进产线、客户现场和数据室。${limit}`,
+    note: "你要看的不只是故事，还有良率、订单、交付周期和真实毛利。",
+    tags: ["国产替代", "工程化", "量产良率", "AI 场景"],
+  };
 }
 
 function renderProject(project, maxDeals) {
