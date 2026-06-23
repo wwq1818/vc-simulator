@@ -505,6 +505,13 @@ h3 {
   font-size: 12px;
 }
 
+.deal-room-tags .hot-tag {
+  border-color: rgba(49, 93, 126, 0.34);
+  background: rgba(49, 93, 126, 0.08);
+  color: var(--ink);
+  font-weight: 700;
+}
+
 .committee-note {
   margin-bottom: 20px;
   padding: 12px 14px;

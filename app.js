@@ -2114,7 +2114,7 @@ function renderBrief() {
           ${visual.keywords.map((word) => `<span>${word}</span>`).join("")}
         </div>
         <div class="signal-grid">
-          <div class="signal-card"><span>风口</span><strong>${era.hot.map((key) => sectors[key]).join(" / ")}</strong><small>${visual.signal}</small></div>
+          <div class="signal-card"><span>风口解释</span><strong>${visual.signalTitle}</strong><small>${visual.signal}</small></div>
           <div class="signal-card"><span>资金情绪</span><strong>${marketMood}</strong><small>${visual.capital}</small></div>
           <div class="signal-card"><span>你的权限</span><strong>${isPartnerRole() ? "最多 3 笔" : "最多 1 笔"}</strong><small>${isPartnerRole() ? "合伙人可以多押几张票" : "投资经理要先学会只选一张票"}</small></div>
         </div>
@@ -2132,6 +2132,7 @@ function eraVisual(era) {
       cls: "era-portal",
       stamp: "BP",
       keywords: ["门户", "美元基金", "分类信息", "纸质 BP"],
+      signalTitle: "入口还在电脑前",
       signal: "流量入口还在野蛮生长",
       capital: "钱开始进来，但共识还没完全形成",
     };
@@ -2141,6 +2142,7 @@ function eraVisual(era) {
       cls: "era-mobile",
       stamp: "APP",
       keywords: ["智能手机", "团购", "O2O", "平台梦"],
+      signalTitle: "手机变成新入口",
       signal: "每个入口都想变成下一张船票",
       capital: "交易很快，价格也开始被速度推高",
     };
@@ -2150,6 +2152,7 @@ function eraVisual(era) {
       cls: "era-unicorn",
       stamp: "TS",
       keywords: ["独角兽", "补贴", "融资发布", "抢额度"],
+      signalTitle: "速度压过价格",
       signal: "项目会里最贵的是错过的焦虑",
       capital: "热钱拥挤，条款开始让位于速度",
     };
@@ -2158,6 +2161,7 @@ function eraVisual(era) {
     cls: "era-hardtech",
     stamp: "LAB",
     keywords: ["国产替代", "新能源", "硬科技", "AI"],
+    signalTitle: "故事要能落地",
     signal: "叙事从流量转向工程和交付",
     capital: "钱更谨慎，但仍愿意为确定性排队",
   };
@@ -2168,6 +2172,7 @@ function renderProjects() {
   const era = eraFor(state.year);
   const visual = eraVisual(era);
   const room = committeeRoomCopy(era, maxDeals);
+  const roomTags = [...era.hot.map((key) => sectors[key]), ...room.tags];
   return shell(`
     <div class="layout">
       <section class="panel plain committee-panel ${visual.cls}">
@@ -2184,7 +2189,7 @@ function renderProjects() {
           </div>
         </div>
         <div class="deal-room-tags">
-          ${room.tags.map((tag) => `<span>${tag}</span>`).join("")}
+          ${roomTags.map((tag, index) => `<span class="${index < era.hot.length ? "hot-tag" : ""}">${tag}</span>`).join("")}
         </div>
         <p class="copy committee-note">今年项目会拿到了 ${state.projects.length} 个新公司，你已经选择 ${state.selected.length}/${maxDeals} 笔。${room.note}</p>
         <div class="project-list">
