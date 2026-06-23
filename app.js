@@ -380,6 +380,519 @@ const eventDeck = [
   },
 ];
 
+const extraEventDeck = [
+  {
+    title: "创始人半夜发来长语音",
+    category: "投后",
+    description: "他和联合创始人吵了一架，开始怀疑公司方向。你知道这通电话处理不好，项目可能先从人心散掉。",
+    choices: [
+      { text: "耐心听完，帮他拆问题", effects: { network: 5, health: -2, career: 2 }, note: "你没有解决所有问题，但让创始人重新愿意坐下来谈。" },
+      { text: "让他第二天找投后同事", effects: { health: 2, network: -3 }, note: "你保住了睡眠，也让对方觉得你只是财务投资人。" },
+    ],
+  },
+  {
+    title: "被投公司 CFO 离职",
+    category: "投后",
+    description: "下一轮融资前，CFO 突然离职。账、预算和董事会材料都需要重新梳理。",
+    choices: [
+      { text: "帮忙找临时财务顾问", effects: { network: 4, track: 3, health: -2 }, note: "你补上了一个关键空位，也把自己的周末搭了进去。" },
+      { text: "要求创始人自己负责", effects: { track: -2, health: 2 }, note: "边界清楚了，但项目后续材料明显慢了下来。" },
+    ],
+  },
+  {
+    title: "LP 要看组合现金流预测",
+    category: "募资",
+    description: "他们不再只听故事，而是要每个项目的 runway、退出窗口和下一轮概率。",
+    choices: [
+      { text: "逐个项目重做模型", effects: { track: 5, aum: 3, health: -2 }, note: "模型不漂亮，但足够诚实，LP 反而更放心。" },
+      { text: "先给乐观版本稳住情绪", effects: { aum: 4, track: -3, health: -1 }, note: "短期过关了，但你知道有几处假设站不太住。" },
+    ],
+  },
+  {
+    title: "媒体想写你的明星项目",
+    category: "声量",
+    description: "记者想采访你和创始人。曝光可能帮助融资，也可能把公司推到过热的位置。",
+    choices: [
+      { text: "配合采访，控制口径", effects: { network: 6, health: -1 }, note: "文章发出来很体面，但你花了很多精力避免它写得太满。" },
+      { text: "劝创始人保持低调", effects: { track: 3, network: -2 }, note: "少了一次出圈机会，但公司避开了无谓的比较。" },
+    ],
+  },
+  {
+    title: "监管部门释放新信号",
+    category: "监管",
+    description: "赛道突然多了政策不确定性。大家都在问，这是不是方向变了。",
+    choices: [
+      { text: "暂停追高，重新评估", effects: { track: 4, network: -2, health: 1 }, note: "你错过了一些热闹，但保住了判断纪律。" },
+      { text: "逆势加深行业访谈", effects: { career: 4, health: -2 }, note: "你没有立刻出手，但比同行更早知道哪些公司能穿越。" },
+    ],
+  },
+  {
+    title: "合伙人要求你陪客户出差",
+    category: "内部",
+    description: "这趟出差和你的项目关系不大，但对基金募资关系很重要。",
+    choices: [
+      { text: "去，顺便维护 LP", effects: { network: 5, aum: 2, health: -2 }, note: "你在飞机上改完了项目 memo，也换来 LP 一次认真反馈。" },
+      { text: "留下来推进项目尽调", effects: { track: 4, network: -3 }, note: "项目推进了，但合伙人觉得你不够懂平台协作。" },
+    ],
+  },
+  {
+    title: "同事抢先约了你想见的创始人",
+    category: "办公室政治",
+    description: "这不是第一次了。你可以挑明，也可以用结果说话。",
+    choices: [
+      { text: "直接约合伙人讲清边界", effects: { career: 5, network: -4, health: -1 }, note: "话说开了，但办公室的温度低了几度。" },
+      { text: "自己补行业图谱，绕开内耗", effects: { track: 4, health: -1 }, note: "你没有赢下这次会议，但赢回了一点主动权。" },
+    ],
+  },
+  {
+    title: "老同学创业找你融资",
+    category: "关系",
+    description: "项目早期、数据很少，但关系很近。你知道这会考验职业和私人边界。",
+    choices: [
+      { text: "按正常流程推进", effects: { network: 2, track: 2, health: -1 }, note: "关系没有被特殊对待，也没有被粗暴拒绝。" },
+      { text: "明确回避，介绍给同行", effects: { network: 4, health: 1 }, note: "你避开了利益冲突，也保留了体面。" },
+    ],
+  },
+  {
+    title: "被投公司想高薪挖你过去",
+    category: "诱惑",
+    description: "创始人说你比他们很多高管更懂公司。这个邀请听起来真诚，也很危险。",
+    choices: [
+      { text: "拒绝，继续站在投资人位置", effects: { career: 4, network: 2 }, note: "你没有换身份，但这家公司更信任你了。" },
+      { text: "认真聊聊，但不立刻决定", effects: { network: 5, health: -1 }, note: "你给自己留了余地，也多了一点职业想象。" },
+    ],
+  },
+  {
+    title: "家里临时有事",
+    category: "家庭",
+    description: "同一天你有项目终面和家里的重要安排。没有一个选择是完全正确的。",
+    choices: [
+      { text: "先处理家里的事", effects: { health: 4, track: -2 }, note: "项目会议错过了，但你没有错过更重要的人。" },
+      { text: "照常参加项目会", effects: { track: 4, health: -3 }, note: "你表现得专业，也清楚自己亏欠了什么。" },
+    ],
+  },
+  {
+    title: "体检报告亮起黄灯",
+    category: "健康",
+    description: "医生说问题还不严重，但再这么熬下去，很难一直没事。",
+    choices: [
+      { text: "减少无效社交，调整节奏", effects: { health: 6, network: -3 }, note: "你少出现在几个饭局里，身体终于喘了口气。" },
+      { text: "先忙完这一阵再说", effects: { track: 3, health: -4 }, note: "你太熟悉这句话了，也知道它经常不兑现。" },
+    ],
+  },
+  {
+    title: "热门赛道估值突然跳涨",
+    category: "市场",
+    description: "同一个公司，两周前和现在已经不是一个价格。所有人都在抢额度。",
+    choices: [
+      { text: "接受贵一点，买入窗口", effects: { network: 4, aum: -3, health: -1 }, note: "你拿到了票，但心里知道安全垫薄了。" },
+      { text: "放弃追价，等下一批", effects: { track: 4, network: -2, health: 1 }, note: "你错过了热闹，也避免了被情绪定价。" },
+    ],
+  },
+  {
+    title: "市场突然转冷",
+    category: "市场",
+    description: "上个月还排队给 TS 的基金，现在都开始说要再看看。",
+    choices: [
+      { text: "回头看被低估的项目", effects: { track: 5, health: -1 }, note: "冷市场里，你终于能听见真实需求的声音。" },
+      { text: "先保护现金，不急出手", effects: { aum: 3, health: 2, network: -2 }, note: "你让基金活得更久，也少了一些市场存在感。" },
+    ],
+  },
+  {
+    title: "创始人隐瞒了一项诉讼",
+    category: "尽调",
+    description: "法律顾问在最后一轮文件里发现了问题。创始人说这事不大，只是忘了讲。",
+    choices: [
+      { text: "暂停投资，重新尽调", effects: { track: 6, network: -3, health: -1 }, note: "你让交易慢了下来，也保住了底线。" },
+      { text: "要求补充披露后继续", effects: { network: 2, track: -2 }, note: "项目没断，但你对创始人的信任打了折。" },
+    ],
+  },
+  {
+    title: "数据室开放得异常顺利",
+    category: "尽调",
+    description: "材料太整齐，回答太快，反而让你觉得哪里不对。",
+    choices: [
+      { text: "追加底层数据抽查", effects: { track: 5, health: -2 }, note: "你发现了几处口径差异，虽然不致命，但足够改变估值判断。" },
+      { text: "相信团队专业度", effects: { network: 3, health: 1, track: -2 }, note: "流程更快了，但你心里留下一个小问号。" },
+    ],
+  },
+  {
+    title: "联合投资人临时撤单",
+    category: "交易",
+    description: "原本说好一起投的基金突然退出。创始人希望你补上缺口。",
+    choices: [
+      { text: "不补缺口，坚持原额度", effects: { track: 3, network: -3 }, note: "你没有被交易节奏裹挟，但关系变得尴尬。" },
+      { text: "协调其他基金进来", effects: { network: 6, health: -2 }, note: "你没多出钱，却多花了很多信用。" },
+    ],
+  },
+  {
+    title: "投委会只剩十分钟",
+    category: "内部",
+    description: "前面的项目严重超时，你准备了三天的材料只剩十分钟可以讲。",
+    choices: [
+      { text: "只讲关键分歧", effects: { track: 4, career: 3 }, note: "你没有讲完整故事，但让大家记住了判断。" },
+      { text: "快速过完整框架", effects: { career: 1, health: -1 }, note: "材料都讲到了，只是没有一个点真正打进去。" },
+    ],
+  },
+  {
+    title: "LP 子女想来基金实习",
+    category: "关系",
+    description: "这件事不大，也不小。处理不好会影响关系，处理太好又会影响团队公平。",
+    choices: [
+      { text: "走正式流程，标准一致", effects: { track: 3, network: -2 }, note: "你没有给特殊通道，团队里有人松了一口气。" },
+      { text: "安排短期项目体验", effects: { network: 4, health: -1 }, note: "关系照顾到了，但你额外花了不少管理精力。" },
+    ],
+  },
+  {
+    title: "创始人朋友圈开炮",
+    category: "投后",
+    description: "他公开抱怨投资人不懂业务。虽然没点名，但大家都知道说的是谁。",
+    choices: [
+      { text: "私下沟通，别扩大冲突", effects: { network: 3, health: -2 }, note: "火没有烧大，但你一整晚都没睡踏实。" },
+      { text: "在董事会上正式回应", effects: { track: 3, network: -3 }, note: "边界立住了，关系也更硬了。" },
+    ],
+  },
+  {
+    title: "项目需要桥接贷款",
+    category: "投后",
+    description: "下一轮还没关，公司现金只够三个月。创始人希望股东先救急。",
+    choices: [
+      { text: "帮忙撮合过桥资金", effects: { network: 5, health: -2 }, note: "公司多活了几个月，你也多背了一段压力。" },
+      { text: "要求先砍成本再谈", effects: { track: 4, network: -2 }, note: "这话不好听，但让公司更早面对现实。" },
+    ],
+  },
+  {
+    title: "竞品拿到巨额融资",
+    category: "市场",
+    description: "你的被投公司团队有点慌。创始人问你要不要也快速启动下一轮。",
+    choices: [
+      { text: "马上组织融资故事", effects: { network: 4, health: -2 }, note: "团队士气稳住了，但故事还需要业绩跟上。" },
+      { text: "先看经营数据，不跟风", effects: { track: 4, health: 1 }, note: "你没有被竞品节奏牵走，创始人一开始不太高兴。" },
+    ],
+  },
+  {
+    title: "被投公司想换赛道叙事",
+    category: "投后",
+    description: "原本做工具的公司，突然想把自己包装成平台。估值可能更高，也可能更虚。",
+    choices: [
+      { text: "压住叙事，先补收入", effects: { track: 5, network: -2 }, note: "你让故事少了一点性感，多了一点可信。" },
+      { text: "顺势升级融资材料", effects: { network: 4, track: -2, health: -1 }, note: "融资语言更好听了，但你知道基本面还没完全跟上。" },
+    ],
+  },
+  {
+    title: "合伙人让你接一个烂摊子",
+    category: "内部",
+    description: "项目不是你投的，但出了问题后需要有人去董事会沟通。",
+    choices: [
+      { text: "接下来，换取信任", effects: { career: 5, health: -3 }, note: "你背了锅，也积累了难得的组织信用。" },
+      { text: "说明边界，只提供支持", effects: { track: 2, network: -3, health: 1 }, note: "你保护了自己，但也错过了一次承担复杂局面的机会。" },
+    ],
+  },
+  {
+    title: "基金要做年度复盘",
+    category: "内部",
+    description: "每个人都要讲自己最成功和最失败的判断。会议室里没有人真正轻松。",
+    choices: [
+      { text: "把错判讲透", effects: { track: 5, career: 3, health: -1 }, note: "你没有显得完美，但显得可信。" },
+      { text: "突出亮点，淡化问题", effects: { network: 3, track: -2 }, note: "PPT 好看了，但复盘价值少了。" },
+    ],
+  },
+  {
+    title: "行业协会请你闭门分享",
+    category: "声量",
+    description: "这不是公开论坛，但来的都是懂行的人。讲得太实会暴露打法，讲得太虚没有意义。",
+    choices: [
+      { text: "讲真实案例，隐去敏感细节", effects: { network: 5, career: 2, health: -1 }, note: "你赢得了一些真正懂行的尊重。" },
+      { text: "讲宏观趋势，少讲方法", effects: { network: 2, health: 1 }, note: "场面过得去，但没有留下太多记忆点。" },
+    ],
+  },
+  {
+    title: "地方政府抛来橄榄枝",
+    category: "政策",
+    description: "他们希望基金去当地设办公室，并承诺产业资源和引导基金支持。",
+    choices: [
+      { text: "认真评估产业资源", effects: { aum: 4, network: 3, health: -1 }, note: "你没有只看补贴，而是先看当地有没有真实项目土壤。" },
+      { text: "礼貌保持距离", effects: { track: 2, network: -2, health: 1 }, note: "你少了一个潜在资金来源，也少了很多协调成本。" },
+    ],
+  },
+  {
+    title: "新基金募资进度落后",
+    category: "募资",
+    description: "合伙人没有明说，但所有人都知道，如果募不起来，下一年的投资会更紧。",
+    choices: [
+      { text: "帮忙拜访老 LP", effects: { aum: 6, network: 4, health: -2 }, note: "你不是募资负责人，但你贡献了自己的信用。" },
+      { text: "专注项目，少掺募资", effects: { track: 4, network: -2 }, note: "你保住了投研节奏，也错过了平台最需要人的时刻。" },
+    ],
+  },
+  {
+    title: "LP 对 DPI 开始焦虑",
+    category: "募资",
+    description: "账面回报讲了很多年，现在他们更想看到现金回来。",
+    choices: [
+      { text: "推动成熟项目找退出窗口", effects: { aum: 4, track: 3, health: -2 }, note: "你开始从买入思维切到退出思维。" },
+      { text: "强调长期价值", effects: { network: -2, health: 1 }, note: "道理没错，但焦虑没有被真正解决。" },
+    ],
+  },
+  {
+    title: "明星创始人开始膨胀",
+    category: "投后",
+    description: "公司增长不错，但创始人越来越不听劝，团队里开始有人离开。",
+    choices: [
+      { text: "私下直说问题", effects: { track: 4, network: -2, health: -1 }, note: "这次谈话不舒服，但比董事会爆雷要早。" },
+      { text: "先不破坏关系", effects: { network: 3, track: -2 }, note: "关系暂时很好，但问题没有消失。" },
+    ],
+  },
+  {
+    title: "团队分析师想离职",
+    category: "管理",
+    description: "他跟了你好几个项目，现在觉得成长太慢，想去创业公司。",
+    choices: [
+      { text: "认真聊职业路径", effects: { network: 3, career: 2, health: -1 }, note: "他未必留下，但你像一个真正的管理者那样处理了这件事。" },
+      { text: "尊重决定，快速交接", effects: { health: 1, track: -2 }, note: "交接完成了，但项目记忆也丢了一部分。" },
+    ],
+  },
+  {
+    title: "董事会要求你站队",
+    category: "投后",
+    description: "创始人与大股东矛盾公开化，你的投票会影响下一阶段控制权。",
+    choices: [
+      { text: "按公司长期利益投票", effects: { track: 5, network: -3, health: -2 }, note: "你得罪了一边，但这次没有背离判断。" },
+      { text: "推动双方先谈判", effects: { network: 4, health: -2 }, note: "你争取了时间，也把自己放进了冲突中心。" },
+    ],
+  },
+  {
+    title: "财务数据突然变好",
+    category: "尽调",
+    description: "增长曲线漂亮得有点突兀。创始人说这是新渠道起量。",
+    choices: [
+      { text: "拆渠道，看真实留存", effects: { track: 5, health: -1 }, note: "你发现增长里有一部分来自一次性大单。" },
+      { text: "相信拐点已经出现", effects: { network: 3, track: -2 }, note: "你获得了创始人的好感，也承担了乐观判断的风险。" },
+    ],
+  },
+  {
+    title: "行业微信群传出负面消息",
+    category: "市场",
+    description: "没人知道真假，但消息已经开始影响下一轮投资人情绪。",
+    choices: [
+      { text: "找到一手信息源核实", effects: { track: 4, network: 2, health: -1 }, note: "你没有被聊天记录牵着走。" },
+      { text: "先按风险处理", effects: { health: 1, network: -2 }, note: "你保守了一点，也避免了踩进传闻里。" },
+    ],
+  },
+  {
+    title: "你被邀请加入项目董事会",
+    category: "投后",
+    description: "这是信任，也是负担。以后公司的关键问题会更频繁地找到你。",
+    choices: [
+      { text: "接受董事席位", effects: { career: 5, network: 4, health: -3 }, note: "你的影响力变大了，日程也变得更碎。" },
+      { text: "改做观察员", effects: { track: 2, health: 1 }, note: "你保留了参与度，也避免了过深绑定。" },
+    ],
+  },
+  {
+    title: "合伙人问你为什么没投中上一轮热门项目",
+    category: "内部",
+    description: "那家公司刚融了大钱，大家都在复盘为什么错过。",
+    choices: [
+      { text: "承认错过，复盘原因", effects: { track: 4, career: 2 }, note: "你没有强行辩解，反而让判断框架更清晰。" },
+      { text: "强调当时估值过高", effects: { track: 1, network: -2 }, note: "你的理由成立一半，但听起来也像防守。" },
+    ],
+  },
+  {
+    title: "项目创始人离婚影响状态",
+    category: "投后",
+    description: "公司业务没立刻出问题，但团队明显感觉创始人心不在焉。",
+    choices: [
+      { text: "私下关心，帮团队稳节奏", effects: { network: 4, health: -2 }, note: "这不是财务模型里的变量，却真实影响公司。" },
+      { text: "只关注经营指标", effects: { track: 2, network: -2 }, note: "你保持了专业距离，也少理解了一些真实风险。" },
+    ],
+  },
+  {
+    title: "春节前还有一个紧急项目",
+    category: "家庭",
+    description: "创始人只在假期前有空见面，而你答应家里早点回去。",
+    choices: [
+      { text: "改签，去见创始人", effects: { track: 4, health: -3 }, note: "你拿到了一手判断，也把亏欠带回了家。" },
+      { text: "让同事先见，自己补电话", effects: { health: 3, career: -1 }, note: "你守住了一个承诺，但项目主导权弱了一点。" },
+    ],
+  },
+  {
+    title: "市场传来 IPO 暂缓消息",
+    category: "退出",
+    description: "几个组合公司的上市计划可能延后，DPI 压力又回来了。",
+    choices: [
+      { text: "寻找并购和老股转让机会", effects: { aum: 3, track: 3, health: -2 }, note: "退出不只有 IPO，但每条路都要重新谈。" },
+      { text: "继续等窗口恢复", effects: { health: 1, network: -2 }, note: "耐心是策略，也可能变成拖延。" },
+    ],
+  },
+  {
+    title: "被投公司要求你帮忙招 CTO",
+    category: "投后",
+    description: "技术负责人空缺已经影响交付。创始人希望你调动人脉。",
+    choices: [
+      { text: "动用猎头和朋友网络", effects: { network: 4, track: 3, health: -2 }, note: "你像半个联合创始人一样补位。" },
+      { text: "建议公司自己建立招聘能力", effects: { track: 2, network: -2 }, note: "长期正确，但短期救不了火。" },
+    ],
+  },
+  {
+    title: "基金内部开始排名",
+    category: "办公室政治",
+    description: "没人喜欢这个表，但所有人都在看自己排第几。",
+    choices: [
+      { text: "用结果争资源", effects: { career: 4, track: 3, health: -1 }, note: "你没有参加太多口水战，数字替你说了一部分话。" },
+      { text: "低调做项目", effects: { health: 2, network: -2 }, note: "你避开了内耗，也少了一些可见度。" },
+    ],
+  },
+  {
+    title: "合作 FA 暗示有返佣空间",
+    category: "底线",
+    description: "对方说得很隐晦，但意思足够明确。你知道这条线不能碰。",
+    choices: [
+      { text: "明确拒绝并记录", effects: { track: 5, network: -3 }, note: "少了一个所谓朋友，多了一层职业安全。" },
+      { text: "换一家顾问继续推进", effects: { health: -1, track: 3 }, note: "你没有把交易做死，也没有把底线做软。" },
+    ],
+  },
+  {
+    title: "老项目突然有并购方接触",
+    category: "退出",
+    description: "价格不算特别高，但能给基金带来现金回款。",
+    choices: [
+      { text: "推动认真谈判", effects: { aum: 5, track: 2, health: -1 }, note: "这不是最性感的退出，但现金是真的。" },
+      { text: "建议再等等估值修复", effects: { track: 2, network: -2 }, note: "你选择继续等，LP 的耐心也继续被消耗。" },
+    ],
+  },
+  {
+    title: "创始人想引入战略投资人",
+    category: "交易",
+    description: "战投能给资源，也可能改变公司独立性。创始人希望你表态。",
+    choices: [
+      { text: "支持但要求条款克制", effects: { track: 4, network: 3, health: -1 }, note: "你没有迷信资源，也没有拒绝现实帮助。" },
+      { text: "反对过早绑定产业方", effects: { track: 3, network: -2 }, note: "你保住了想象空间，也让融资难度上升。" },
+    ],
+  },
+  {
+    title: "同行想和你交换项目名单",
+    category: "关系",
+    description: "交换信息很常见，但边界稍微模糊一点，就可能伤到创始人信任。",
+    choices: [
+      { text: "只交流行业，不交换名单", effects: { track: 3, network: -1 }, note: "你没有获得捷径，也没有出卖信任。" },
+      { text: "有限交换非敏感信息", effects: { network: 4, health: -1 }, note: "关系近了一点，边界也变得更需要自觉。" },
+    ],
+  },
+  {
+    title: "你被安排带新人",
+    category: "管理",
+    description: "新人聪明但没有经验。带他会占时间，不带他以后还是你救火。",
+    choices: [
+      { text: "认真带项目方法", effects: { career: 4, health: -2 }, note: "短期慢了一点，长期团队轻了一点。" },
+      { text: "让他自己摔几次", effects: { health: 1, track: -2 }, note: "成长会发生，但代价可能落在项目上。" },
+    ],
+  },
+  {
+    title: "行业突然开始讲新概念",
+    category: "市场",
+    description: "一个新词在所有 BP 里出现。你还不确定这是范式变化，还是又一轮包装。",
+    choices: [
+      { text: "先做十个专家访谈", effects: { track: 4, health: -2 }, note: "你没有立刻相信，也没有轻易错过。" },
+      { text: "快速建仓相关项目", effects: { network: 3, aum: -2, track: -1 }, note: "你上了车，但车往哪里开还不完全清楚。" },
+    ],
+  },
+  {
+    title: "被投公司出现食品安全舆情",
+    category: "危机",
+    description: "如果处理不好，公司多年品牌积累可能一夜归零。",
+    choices: [
+      { text: "要求公开透明处理", effects: { track: 5, network: -2, health: -2 }, note: "短期难看，但长期还能保住信任。" },
+      { text: "先压热搜再调查", effects: { network: 2, track: -5, health: -1 }, note: "舆情小了，问题却没有真正消失。" },
+    ],
+  },
+  {
+    title: "技术项目交付延期",
+    category: "投后",
+    description: "客户现场迟迟跑不起来，销售还在说下个月就好。",
+    choices: [
+      { text: "去现场看真实问题", effects: { track: 5, health: -2 }, note: "你发现不是销售问题，而是产品化还没完成。" },
+      { text: "相信团队按计划修复", effects: { network: 2, track: -2 }, note: "团队压力小了，但风险也被推迟了。" },
+    ],
+  },
+  {
+    title: "创始人要求更高估值续投",
+    category: "交易",
+    description: "公司确实进步了，但还没有进步到这个价格。你要不要继续支持？",
+    choices: [
+      { text: "续投但压低金额", effects: { network: 3, track: 2, aum: -2 }, note: "你留在牌桌上，也没有完全放弃价格纪律。" },
+      { text: "不续投，保留观察权", effects: { track: 3, network: -3 }, note: "创始人不高兴，但你没有把沉没成本当理由。" },
+    ],
+  },
+  {
+    title: "一个项目让你想起上一轮失败",
+    category: "判断",
+    description: "它们不完全一样，但几个危险信号很像。你担心自己过度防御，也担心重蹈覆辙。",
+    choices: [
+      { text: "把相似点逐条拆开", effects: { track: 4, health: -1 }, note: "你没有被创伤控制，也没有忽视经验。" },
+      { text: "直接放弃", effects: { health: 2, network: -2 }, note: "你避开了风险，也可能避开了一次修正判断的机会。" },
+    ],
+  },
+];
+
+eventDeck.push(...extraEventDeck);
+
+const moreEventSpecs = [
+  ["LP 临时取消年度会", "募资", "对方说只是行程冲突，但你知道他们最近在重新评估所有 VC 配置。", "主动补一份组合更新", { aum: 3, network: 3, health: -1 }, "你没有等对方追问，而是先把透明度交出去。", "不急着反应，等正式反馈", { health: 1, network: -2 }, "你少做了一些无效动作，也可能错过一次挽回信任的窗口。"],
+  ["被投公司销售冠军离职", "投后", "收入增长有一部分来自这个人。团队说影响不大，你并不完全相信。", "追问销售体系是否可复制", { track: 4, health: -1 }, "你把问题从一个人的离职，拆成了组织能力。", "相信管理层接得住", { network: 2, track: -2 }, "关系更顺了，但风险被延后验证。"],
+  ["合伙人让你压低估值", "交易", "项目不错，但价格不便宜。合伙人希望你做那个难开口的人。", "直接谈价格纪律", { track: 4, network: -2, health: -1 }, "你没有把不好听的话留给别人。", "用条款换估值空间", { network: 3, career: 2, health: -1 }, "你没有赢下价格，但赢回一些保护。"],
+  ["项目 BP 被同行提前拿到", "竞争", "你还在排会议，同行已经见完创始人。信息差正在消失。", "加速约创始人深聊", { network: 4, health: -2 }, "你追上了节奏，也让一天变得更长。", "先补行业判断，不抢会", { track: 4, health: 1 }, "你没有被同行牵着跑，判断更稳了一点。"],
+  ["创始人要求更宽松的对赌", "交易", "他说公司需要空间，不想被短期指标绑死。你也担心条款太软。", "保留关键保护条款", { track: 4, network: -2 }, "创始人有点不舒服，但你保住了基金底线。", "放松条款换更多股权", { network: 3, track: -1 }, "交易更容易推进，但未来风险更依赖判断。"],
+  ["LP 要求 ESG 报告", "募资", "这不是你最熟悉的工作，但越来越多 LP 开始把它写进流程。", "补齐组合 ESG 信息", { aum: 3, career: 3, health: -2 }, "你做了很多琐碎工作，也让机构显得更成熟。", "先给框架，后续完善", { network: 2, health: -1 }, "你没有一次做完，但至少给了对方回应。"],
+  ["董事会材料临时改版", "投后", "创始人希望把亏损讲得更轻一点。你知道 LP 和董事会迟早会看穿。", "要求如实披露", { track: 5, network: -2 }, "会议难看了一点，但信任没有继续透支。", "允许调整表达方式", { network: 3, track: -2 }, "场面稳住了，问题也被包装得更温和。"],
+  ["你被拉进创始人家庭矛盾", "投后", "公司股权和家庭关系纠缠到一起。你本来只想投一家公司。", "建议引入外部律师", { track: 3, health: -1 }, "你没有亲自裁判，但推动问题进入专业流程。", "先做情绪缓冲", { network: 3, health: -3 }, "你暂时稳住了人，也消耗了很多自己。"],
+  ["同行请你联名推荐项目", "关系", "项目你没完全看懂，但对方希望借你的名字提高可信度。", "拒绝背书", { track: 4, network: -2 }, "你没有把信用借给不确定的判断。", "只做有限介绍", { network: 3, career: 1 }, "你保留了关系，也把边界说在前面。"],
+  ["监管问询影响组合公司", "监管", "问询不等于处罚，但资本市场已经开始重新定价。", "推动公司补充合规材料", { track: 4, health: -2 }, "流程慢了，但风险变得更可见。", "先观察问询进展", { health: 1, network: -2 }, "你没有过度反应，也可能错失提前处理的机会。"],
+  ["项目创始人想做副业", "投后", "他说只是个人兴趣，但公司还没到可以分心的时候。", "明确要求聚焦主业", { track: 4, network: -2 }, "你说得很硬，但问题被及时按住了。", "观察一段时间", { network: 2, track: -2 }, "关系没伤，但你的不安没有消失。"],
+  ["基金品牌被媒体质疑", "声量", "报道把几笔失败项目放在一起，标题很刺眼。", "用事实回应", { network: 2, track: 3, health: -2 }, "你没有吵架，只把能公开的信息讲清楚。", "冷处理，不放大", { health: 2, network: -2 }, "风波慢慢过去，但内部士气受了点影响。"],
+  ["被投公司要裁员", "投后", "现金流撑不住了。创始人希望你支持这个痛苦决定。", "支持裁员并监督补偿", { track: 4, health: -3 }, "你没有把成本压力转嫁给员工，也没有逃避现实。", "建议再融资后处理", { network: 2, track: -3 }, "短期气氛好了，但现金流问题没有消失。"],
+  ["合伙人问你是否愿意外派", "内部", "新城市有项目机会，也意味着你要离开熟悉的生活半径。", "接受外派一年", { network: 5, career: 5, health: -3 }, "你打开了新市场，也把生活重新打散。", "留在原团队深耕", { track: 3, health: 2 }, "你放弃了扩张机会，换来更稳定的节奏。"],
+  ["项目财务顾问换人", "交易", "新 FA 更激进，融资节奏一下子变快，也变得更吵。", "重新校准融资节奏", { track: 3, health: -1 }, "你没有让交易被话术推着走。", "借势扩大投资人名单", { network: 4, track: -1 }, "声量变大了，确定性没有同步变强。"],
+  ["合伙人想投你不看好的项目", "内部", "他很兴奋，你很犹豫。反对可能影响关系，不反对可能影响业绩。", "把反对意见写进 memo", { track: 5, network: -3 }, "你不一定能阻止交易，但留下了清楚的判断。", "保留意见但支持推进", { network: 3, track: -2 }, "你换来内部顺滑，也把风险留给未来。"],
+  ["老项目突然被大厂盯上", "退出", "对方还没出价，但并购窗口可能正在打开。", "推动创始人认真准备", { aum: 4, track: 3, health: -2 }, "你没有等报价落下才开始准备。", "先稳住团队，不急谈卖", { network: 3, track: 1 }, "你保留了独立发展可能，也承担了窗口消失的风险。"],
+  ["你发现项目数据口径频繁变化", "尽调", "每次问到细节，团队都能解释，但解释越来越复杂。", "要求统一底层口径", { track: 5, health: -2 }, "你把漂亮曲线拆成了可核查的表。", "接受阶段性口径差异", { network: 2, track: -2 }, "推进更快，但风险更模糊。"],
+  ["你被邀请给创业营授课", "声量", "这会花掉一个周末，但也可能让你更早遇到下一批创始人。", "去讲真实案例", { network: 5, career: 2, health: -2 }, "你讲完很累，但收到了几个不错的 BP。", "婉拒，保留周末", { health: 3, network: -1 }, "你没有出现在台上，但终于睡了个完整觉。"],
+  ["投资人群里开始互相甩锅", "投后", "项目进展不好，大家开始讨论当年是谁主推的。", "拉回问题本身", { track: 4, career: 2, health: -1 }, "你没有参与甩锅，而是让会议回到解决方案。", "保持沉默", { health: 1, career: -2 }, "你避开了冲突，也让别人替你定义了态度。"],
+  ["创始人要求你介绍大客户", "投后", "介绍可以帮助公司，也会消耗你积累很久的信任。", "筛选后再介绍", { network: 3, track: 3, health: -1 }, "你没有滥用关系，也让介绍更有效。", "直接打开资源", { network: -1, track: 2, health: -2 }, "公司很感激，但你欠下了更多人情。"],
+  ["项目进入价格战", "市场", "收入还在涨，毛利却越来越薄。创始人说这是必要阶段。", "要求看单位经济模型", { track: 5, health: -1 }, "你不再被 GMV 安慰，开始看每单到底赚不赚钱。", "支持先抢市场份额", { network: 3, track: -3 }, "增长继续好看，但商业质量变得更脆。"],
+  ["基金后台系统出错", "内部", "一个项目的材料版本被传错，投委会差点引用旧数据。", "推动流程整改", { career: 3, health: -1 }, "这不是最光鲜的工作，但避免了下一次事故。", "只修这次问题", { health: 1, track: -1 }, "眼前过关了，系统性风险还在。"],
+  ["你被要求参加太多路演", "健康", "每场都可能有项目，但大多数只是重复信息。", "筛选高质量场次", { health: 4, network: -2 }, "你少见了一些人，也保住了判断力。", "继续高密度参加", { network: 4, health: -3 }, "你保持在线，也明显变得迟钝。"],
+  ["明星项目想跳过投委会", "底线", "创始人说额度很紧，希望你先口头承诺。", "坚持走完流程", { track: 5, network: -2 }, "你可能失去额度，但没有失去流程底线。", "先给非正式承诺", { network: 4, track: -4, health: -1 }, "你抢到了位置，也把自己放进灰区。"],
+  ["你听到创始人团队内斗传闻", "尽调", "消息来源不确定，但足以让你重新看团队稳定性。", "分别访谈核心高管", { track: 4, health: -2 }, "你没有被传闻吓退，而是把它变成尽调问题。", "等正式材料披露", { health: 1, track: -2 }, "你避免了过度介入，也可能错过早期信号。"],
+  ["合作律师提醒条款有坑", "交易", "问题不致命，但会在下一轮融资时变得麻烦。", "现在就改条款", { track: 4, health: -1, network: -1 }, "交易慢了一点，未来干净了很多。", "留到下一轮处理", { network: 2, track: -2 }, "当下顺了，问题被推给未来。"],
+  ["被投公司想高调办发布会", "声量", "产品还没完全稳定，但团队很想制造市场声量。", "建议小范围客户会", { track: 4, network: -1 }, "声量小了，但反馈更真实。", "支持大发布会", { network: 5, track: -2, health: -1 }, "公司很兴奋，产品压力也提前暴露。"],
+  ["LP 想让你投熟人项目", "关系", "项目质量一般，但 LP 语气很客气地表达了期待。", "按标准拒绝", { track: 5, network: -3 }, "你损失了一点关系温度，保住了投资纪律。", "安排正式项目会评审", { network: 3, health: -1 }, "你给了面子，也把决定交回流程。"],
+  ["项目突然想出海", "市场", "国内增长放缓，创始人把希望放到海外市场。", "先验证海外渠道", { track: 4, health: -1 }, "你把口号拆成客户、渠道和合规。", "支持快速试错", { network: 3, aum: -2 }, "公司动作快了，试错成本也上来了。"],
+  ["你需要在两个项目间二选一", "判断", "一个更稳，一个更有想象力。你的时间和额度都不够同时推进。", "选更稳的现金流", { track: 3, health: 1 }, "你牺牲了一点想象力，换来更可验证的路径。", "选更大的赔率", { career: 4, health: -1 }, "你选择了不确定性，也选择了承担更大的解释压力。"],
+  ["项目创始人开始频繁参加论坛", "投后", "他的名气越来越大，公司的经营会议却越来越短。", "提醒他回到经营", { track: 4, network: -2 }, "你说了不讨喜的话，但公司需要这句话。", "利用声量帮助融资", { network: 4, track: -1 }, "声量带来了机会，也放大了虚火。"],
+  ["合伙人让你写基金策略白皮书", "内部", "这不是单个项目，却会影响基金下一阶段怎么投。", "认真写成方法论", { career: 6, track: 3, health: -2 }, "你把零散判断变成了可被组织复用的语言。", "快速完成交差", { health: 2, career: -1 }, "任务过去了，机会也过去了。"],
+  ["被投公司现金流比预期更好", "投后", "这不是爆炸增长，但公司开始证明自己能自己造血。", "鼓励降低融资依赖", { track: 5, aum: 2 }, "你看到了一种不那么性感但更抗周期的胜利。", "趁势启动下一轮融资", { network: 3, aum: 3, health: -1 }, "窗口不错，但你也知道融资不是唯一答案。"],
+  ["项目核心供应商涨价", "投后", "毛利模型被重新打穿。创始人说只是短期波动。", "重算供应链敏感性", { track: 4, health: -1 }, "你把风险从一句解释变成了数字。", "相信短期波动", { network: 2, track: -2 }, "关系更顺，但毛利问题没有被解决。"],
+  ["基金考虑合并两条产品线", "内部", "组织调整会影响你能看的项目和汇报对象。", "主动争取新产品线角色", { career: 5, network: 2, health: -1 }, "你没有等安排落下来，而是先表达了位置。", "先观察组织风向", { health: 1, career: -1 }, "你避开了站队，也暂时失去主动权。"],
+  ["合伙人让你去安抚创始人", "投后", "基金决定不再追加投资，创始人情绪很大。", "坦诚解释原因", { track: 4, network: -2, health: -2 }, "关系很难完全保住，但你没有用空话拖延。", "留下模糊空间", { network: 2, track: -3 }, "场面好看了一点，信任却被慢慢消耗。"],
+  ["你发现自己越来越怕错", "心理", "几次失败之后，你开始下意识寻找不投的理由。", "把恐惧写进决策框架", { track: 5, health: 1 }, "你没有否认情绪，而是让它接受审计。", "继续用忙碌掩盖犹豫", { health: -2, career: -2 }, "你看了很多项目，却越来越难按下确认键。"],
+  ["市场开始奖励盈利", "市场", "过去讲增长的公司，现在都被问什么时候赚钱。", "重估组合盈利路径", { track: 5, health: -1 }, "你不再只看增速，也开始看公司能不能自己活下去。", "坚持增长优先", { network: 2, track: -2 }, "这在顺风期有用，在逆风期会更难解释。"],
+  ["项目法务尽调发现历史代持", "尽调", "创始人说早就解决了，但文件链条并不完整。", "补齐确权文件", { track: 5, health: -2 }, "交易慢下来，但未来少了一个雷。", "签承诺函后继续", { network: 2, track: -2 }, "流程快了，风险也被留在纸面上。"],
+  ["创始人想用融资买增长", "投后", "模型显示只要砸钱，收入就能上去。但单位经济还没证明。", "先验证单城模型", { track: 5, network: -2 }, "你挡住了扩张冲动，也挡住了一些短期漂亮数据。", "支持快速铺开", { network: 4, aum: -2, track: -2 }, "增长变快了，问题也变大了。"],
+  ["你被要求陪 LP 打一整天会", "募资", "这一天没有新项目，但可能决定下一只基金能否多拿一笔钱。", "认真陪完并复盘组合", { aum: 6, network: 4, health: -2 }, "你用一天时间换来了一点长期信任。", "只参加关键环节", { track: 2, network: -2, health: 1 }, "你保住了项目时间，也少了一些 LP 温度。"],
+  ["项目突然收到大客户预付款", "投后", "这笔钱改善了现金流，也可能掩盖产品仍未标准化的问题。", "追问可复制性", { track: 4, health: -1 }, "你没有被一笔大单冲昏头脑。", "把它作为融资亮点", { network: 3, aum: 2, track: -1 }, "故事更好讲了，但它还不是系统能力。"],
+  ["内部开始讨论接班梯队", "职业机会", "你不是唯一候选人。接下来几年，项目结果和组织信用都会被放大。", "主动承担难项目", { career: 7, health: -2 }, "你没有只挑顺风局，也让自己进入更核心的视野。", "保持稳健节奏", { track: 3, health: 2 }, "你没有冒进，但存在感也没那么强。"],
+  ["合伙人提醒你别太像创始人", "边界", "你帮某个项目太多，已经开始像公司半个高管。", "退回董事会边界", { health: 3, track: 2 }, "你减少了救火，也让创始人重新承担责任。", "继续深度介入", { network: 4, track: 2, health: -3 }, "项目短期更稳，你也更难抽身。"],
+];
+
+eventDeck.push(...moreEventSpecs.map(([title, category, description, textA, effectsA, noteA, textB, effectsB, noteB]) => ({
+  title,
+  category,
+  description,
+  choices: [
+    { text: textA, effects: effectsA, note: noteA },
+    { text: textB, effects: effectsB, note: noteB },
+  ],
+})));
+
 const careerEventDeck = [
   {
     title: "投委会后，管理合伙人单独留下你",
@@ -419,12 +932,158 @@ const careerEventDeck = [
   },
 ];
 
+careerEventDeck.push(
+  {
+    title: "基金准备设赛道负责人",
+    category: "职业机会",
+    description: "合伙人想把某个重点赛道交给一个人长期负责。你有机会拿到更稳定的话语权，也会被这个标签绑定。",
+    choices: [
+      { text: "接下赛道负责人", effects: { career: 10, network: 5, aum: 6, health: -2 }, note: "你有了更清晰的地盘，也开始为这个赛道的每一次波动负责。" },
+      { text: "保持多赛道灵活性", effects: { track: 5, health: 1 }, note: "你没有被标签锁住，但资源倾斜也少了一些。" },
+    ],
+    minYear: 2012,
+    requires: (s) => s.track >= 55 || s.network >= 58,
+    weight: 5,
+  },
+  {
+    title: "合伙人给你一笔试点额度",
+    category: "职业机会",
+    description: "额度不大，但可以由你主导判断。它像一场不公开的考试。",
+    choices: [
+      { text: "接受额度，自己负责结果", effects: { aum: 10, career: 8, health: -1 }, note: "你第一次真正感觉到，钱不是数字，是责任。" },
+      { text: "先要求共同决策", effects: { track: 3, career: 3, health: 1 }, note: "你放慢了授权速度，但降低了单独背锅的风险。" },
+    ],
+    minYear: 2010,
+    requires: (s) => s.role === "投资经理" && s.track >= 52,
+    weight: 7,
+  },
+  {
+    title: "年度奖金谈判",
+    category: "职业机会",
+    description: "你的项目贡献不小，但奖金池有限。你可以谈钱，也可以谈权限。",
+    choices: [
+      { text: "争取更多项目主导权", effects: { career: 7, network: 2, health: -1 }, note: "你没有只盯着奖金，而是把谈判换成了下一年的空间。" },
+      { text: "直接争取现金奖金", effects: { health: 3, network: -2 }, note: "这很现实，也让部分合伙人觉得你还不够长期。" },
+    ],
+    minYear: 2008,
+    requires: (s) => s.track >= 50,
+    weight: 4,
+  },
+  {
+    title: "Carry 分配重新讨论",
+    category: "职业机会",
+    description: "基金准备调整 Carry 方案。你的名字第一次出现在讨论名单里。",
+    choices: [
+      { text: "争取进入 Carry 池", effects: { career: 9, network: -2, health: -1 }, note: "你把话说得很清楚，也让自己真正进入长期激励游戏。" },
+      { text: "先争取下一只基金份额", effects: { career: 5, network: 3 }, note: "你没有在当下硬碰硬，而是把筹码放到下一周期。" },
+    ],
+    minYear: 2014,
+    requires: (s) => s.track >= 62 || s.role === "合伙人",
+    weight: 4,
+  },
+  {
+    title: "被安排管理两名分析师",
+    category: "职业机会",
+    description: "你不再只是自己看项目，还要让别人看得更好。管理开始进入你的工作。",
+    choices: [
+      { text: "认真搭投研方法", effects: { career: 7, track: 3, health: -2 }, note: "团队开始复用你的判断框架，你也开始被更多杂事找上门。" },
+      { text: "继续自己冲在前面", effects: { track: 4, health: -1 }, note: "你效率还在，但团队成长慢了一点。" },
+    ],
+    minYear: 2011,
+    requires: (s) => s.track >= 55 || s.career >= 25,
+    weight: 5,
+  },
+  {
+    title: "关键项目让你进投委会旁听",
+    category: "职业机会",
+    description: "你还没有正式投票权，但可以坐进那个房间。很多职业变化都是从旁听开始的。",
+    choices: [
+      { text: "抓住机会表达判断", effects: { career: 8, track: 2, health: -1 }, note: "你说得不多，但有一句话被合伙人记住了。" },
+      { text: "先观察合伙人怎么争论", effects: { career: 4, health: 1 }, note: "你没有急着表现，却看懂了决策真正发生的方式。" },
+    ],
+    minYear: 2009,
+    requires: (s) => s.role === "投资经理" && (s.track >= 50 || s.network >= 55),
+    weight: 6,
+  },
+  {
+    title: "老合伙人准备退休",
+    category: "职业机会",
+    description: "他的几个项目和关系需要有人接住。接得住是机会，接不住就是包袱。",
+    choices: [
+      { text: "接手他的组合和关系", effects: { career: 9, network: 6, health: -3 }, note: "你突然被更多人认识，也突然有了更多历史问题。" },
+      { text: "只接熟悉的部分", effects: { track: 4, health: -1 }, note: "你没有贪多，错过了一些关系，也少背了一些旧账。" },
+    ],
+    minYear: 2013,
+    requires: (s) => s.role !== "投资经理" || s.network >= 65,
+    weight: 4,
+  },
+  {
+    title: "基金想让你转募资岗",
+    category: "职业机会",
+    description: "你关系维护得不错，合伙人觉得你也许适合去前台募资。你知道这会改变职业曲线。",
+    choices: [
+      { text: "拒绝转岗，继续做投资", effects: { track: 4, career: 3, network: -2 }, note: "你守住了投资身份，也放弃了一条更靠近 LP 的路。" },
+      { text: "兼顾募资和投资", effects: { aum: 8, network: 6, health: -3 }, note: "你拿到更多 LP 入口，也让自己的日程变得更难完整。" },
+    ],
+    minYear: 2012,
+    requires: (s) => s.network >= 62,
+    weight: 3,
+  },
+  {
+    title: "你被边缘化到冷门赛道",
+    category: "职业机会",
+    description: "热门项目暂时轮不到你了。冷门赛道看起来像惩罚，也可能是新的入口。",
+    choices: [
+      { text: "把冷门赛道做深", effects: { track: 6, career: 4, health: -1 }, note: "你没有把边缘当成失败，而是把它变成了差异化。" },
+      { text: "继续争取热门项目", effects: { network: -3, career: 3, health: -1 }, note: "你没有认命，但内部摩擦也变多了。" },
+    ],
+    minYear: 2010,
+    requires: (s) => s.track < 65,
+    weight: 4,
+  },
+  {
+    title: "合伙人让你代表基金发言",
+    category: "职业机会",
+    description: "这是一次公开露面。讲得好，你会被行业记住；讲得太满，也会被行业记住。",
+    choices: [
+      { text: "讲克制的长期判断", effects: { network: 6, career: 4, health: -1 }, note: "你没有制造爆款金句，但几个重要的人听懂了。" },
+      { text: "讲更锋利的观点", effects: { network: 8, track: -2, health: -2 }, note: "你出圈了，也被贴上了更鲜明的标签。" },
+    ],
+    minYear: 2011,
+    requires: (s) => s.network >= 58 || s.track >= 58,
+    weight: 4,
+  },
+  {
+    title: "下一只基金要不要给你 GP Title",
+    category: "职业机会",
+    description: "这不是完整合伙人，但已经是通往合伙人的门缝。Title、责任和压力一起到来。",
+    choices: [
+      { text: "接受 GP Title", effects: { career: 12, aum: 12, network: 4, health: -2 }, note: "你的名片变了，别人看你的方式也变了。" },
+      { text: "等真正投票权再说", effects: { track: 5, health: 2 }, note: "你没有被 Title 打动，更在意它背后的权力是否真实。" },
+    ],
+    minYear: 2015,
+    requires: (s) => s.role !== "合伙人" && s.role !== "创始合伙人" && s.track >= 62,
+    weight: 5,
+  },
+  {
+    title: "某个 LP 点名想见你",
+    category: "职业机会",
+    description: "他们不是想见基金，而是想听你讲组合。你的个人信用开始从机构里长出来。",
+    choices: [
+      { text: "亲自复盘组合", effects: { aum: 8, network: 6, career: 5, health: -2 }, note: "你讲得不花哨，但 LP 感到这个人真的知道钱投去了哪里。" },
+      { text: "请合伙人一起出面", effects: { network: 4, career: 3 }, note: "你没有独占关系，也让平台更放心。" },
+    ],
+    minYear: 2014,
+    requires: (s) => s.track >= 60 || s.network >= 66,
+    weight: 4,
+  }
+);
+
 const investorComments = {
   pre: [
     "一位早期投资人看完材料后说：这个项目不是没有风险，但如果判断对了，赔率来自时点。",
     "某美元基金合伙人在会后提醒：别只看增长，先看它是不是靠融资买出来的增长。",
     "一位消费投资人评价：品牌声量不等于复购，渠道健康比故事更重要。",
-    "某硬科技投资人说：样机能跑和量产能交付，中间隔着一整家公司。",
     "一位老 VC 的备注写着：创始人如果能连续三年不变形，这家公司才真正开始值钱。",
     "某知名投资人风格的点评：这类机会，贵不是问题，贵且不可证伪才是问题。",
   ],
@@ -434,6 +1093,117 @@ const investorComments = {
     "一位同行笑着说：所有人都看过，只是少数人真的下了手。",
     "投后会上有人感叹：这家公司最后证明，增长质量比增长速度更难得。",
     "一位资深投资人复盘：失败不是因为风险没看见，而是看见了还低估了它。",
+  ],
+};
+
+const eraInvestorComments = [
+  { from: 2005, to: 2009, phase: "pre", text: "沈南鹏式的判断会先问：这个市场够不够大，创始人有没有连续创业的韧性。" },
+  { from: 2005, to: 2011, phase: "pre", text: "熊晓鸽那代美元基金常讲的一句话是，先看人，再看市场给不给十年窗口。" },
+  { from: 2008, to: 2014, phase: "pre", text: "徐新风格的消费判断很直接：品牌最终要回到复购、毛利和渠道效率。" },
+  { from: 2010, to: 2015, phase: "pre", text: "朱啸虎式的提醒：速度重要，但烧钱买来的规模要小心被误认为网络效应。" },
+  { from: 2012, to: 2018, phase: "pre", text: "张磊常被提到的长期主义，在这一轮里会变成一个问题：这家公司十年后还重要吗？" },
+  { from: 2014, to: 2020, phase: "pre", text: "王兴式的冷问题会落在终局：如果所有人都进来补贴，最后谁留下真实供给？" },
+  { from: 2015, to: 2021, phase: "pre", text: "傅盛那类产品人会追问：增长不是答案，用户为什么非用你不可才是答案。" },
+  { from: 2018, to: 2024, phase: "pre", text: "硬科技投资人的共识越来越像一句老话：实验室指标不等于工程化交付。" },
+  { from: 2020, to: 2024, phase: "pre", text: "AI 项目会让人想起孙正义式的豪赌，但真正难的是把愿景拆成收入和毛利。" },
+  { from: 2005, to: 2012, phase: "post", text: "退出复盘时，有人提起段永平的朴素标准：看懂生意，比听懂故事重要。" },
+  { from: 2010, to: 2016, phase: "post", text: "一位同行复盘说，这笔像刘强东早年讲现金流那样现实：活下来本身就是战略。" },
+  { from: 2015, to: 2020, phase: "post", text: "后来看，这更像张一鸣常说的延迟满足：真正的回报不是最吵的时候给出的。" },
+  { from: 2018, to: 2024, phase: "post", text: "投后会上有人借用巴菲特那句老逻辑：潮水退去，才知道谁在裸泳。" },
+  { from: 2020, to: 2024, phase: "post", text: "AI 热潮后复盘，大家终于承认：参数不是壁垒，场景、数据和组织才是。" },
+];
+
+const failedInvestmentLines = [
+  "你也记得「{name}」：它像一张没有寄出的明信片，提醒你当年有些风险其实已经写在纸面上。",
+  "「{name}」后来成了你投委会里的反面教材，不是因为它最惨，而是因为你曾经最愿意替它辩护。",
+  "你偶尔还会想起「{name}」的数据室，里面每一个没追问到底的文件夹，后来都变成了学费。",
+  "「{name}」没有把你击垮，但它让你从此对“创始人很强”这句话多问三遍为什么。",
+  "最难忘的不是「{name}」亏了钱，而是你终于承认，自己当时把愿望当成了判断。",
+  "「{name}」退出后，你在复盘里写下：风险不是黑天鹅，更多时候是被忽略的小字。",
+];
+
+const quietInvestmentLines = [
+  "那些没有爆发的项目，也悄悄改变了你的判断方式。",
+  "有些项目没有成为新闻，却让你学会在热闹之外重新计算赔率。",
+  "没有每一笔都给出戏剧性的答案，但每一笔都在训练你识别周期的噪音。",
+  "组合里那些平淡的名字，最后反而教会你：VC 不是连续押中风口那么简单。",
+  "你没有记住每一次董事会，却记住了那些现金流、招聘和下一轮融资带来的细节。",
+];
+
+const lifeLines = {
+  exhausted: [
+    "家人记得你很多次在饭桌上接起电话，也记得你后来开始学着把手机反扣在桌面。",
+    "孩子或伴侣未必懂 AUM 是什么，但他们知道你有几年总是在登机、开会和补觉之间切换。",
+    "家里人对你的工作评价很简单：不是不支持，只是希望你偶尔真的在场。",
+    "你把很多压力留在电梯和车里，回家后尽量像没事一样，但亲近的人其实都看得出来。",
+  ],
+  tired: [
+    "这份工作没有只消耗工作日，它也偷走了一些睡眠、周末和本来可以慢慢说完的话。",
+    "你开始习惯半夜醒来回消息，也开始明白身体不是可以无限追加的基金。",
+    "朋友聚会里你常常迟到早退，大家嘴上调侃，心里也知道你被周期推着走。",
+    "体检报告比 LP 邮件更诚实，它不关心你刚投中什么项目。",
+  ],
+  solo: [
+    "你把家里的安全感也押进了新基金，庆功宴和现金流压力常常在同一天出现。",
+    "独立之后，家人第一次意识到，原来你不是只在投公司，也在经营自己的命运。",
+    "你的名片更自由了，但每一次募资不顺，都会真实地影响家里的空气。",
+    "身边人看到你终于有了自己的旗号，也看到你越来越少把疲惫说出口。",
+  ],
+  balanced: [
+    "你没有把每个机会都变成战役，生活因此保留了一点正常的形状。",
+    "你错过过项目，也保住过周末；这在某些基金故事里不够传奇，但在生活里很珍贵。",
+    "家人对你的评价不是最成功，而是这些年你至少还记得回来吃饭。",
+    "你没有成为手机永远在线的人，这让你少了一些机会，也留住了一些关系。",
+  ],
+  proven: [
+    "身边人未必懂每一个项目，但他们知道你终于等到了一些迟来的证明。",
+    "后来亲友提起你的工作，不再只说辛苦，也开始说你当年确实看对过一些东西。",
+    "你没有解释每一个行业术语，只是在某次退出后，终于请家里人吃了一顿很踏实的饭。",
+    "那些年被打断的晚餐没有完全白费，至少有几次判断给了你和家人新的安全感。",
+  ],
+  default: [
+    "你学会在机场、会议室和深夜出租车之间切换，也学会承认生活不是投资组合的附属品。",
+    "家人和朋友看见的是一个总在赶路的人，你自己知道，这条路有时也会反过来推着你走。",
+    "你很少把压力讲完整，更多时候只是说一句最近有点忙。",
+    "这份职业给了你视野，也让你不断练习如何不被工作吃掉全部生活。",
+  ],
+};
+
+const socialLines = {
+  legend: [
+    "行业里有人把你讲成故事，也有人把你当成饭局上的样本，夸张和误读一起流传。",
+    "你的名字开始出现在别人的募资材料和茶水间闲聊里，真假各半，但都说明你被看见了。",
+    "有些年轻投资人把你当作坐标，有些同行把你当作变量；这就是江湖的评价方式。",
+  ],
+  network: [
+    "你在行业里的名字越来越常被提起，只是声量有时比真实业绩跑得更快。",
+    "饭局和群聊给了你很多入口，也让你明白人脉不是护城河，只是更早听见风声。",
+    "你认识的人很多，真正能在低谷时接电话的人少一些，这也是行业的真实质地。",
+  ],
+  track: [
+    "媒体喜欢把你的判断写成天赋，但只有你知道那里面有多少错过、等待和不确定。",
+    "外界把成功项目压缩成一句“眼光好”，你知道里面更多是时点、运气和忍耐。",
+    "行业会奖励结果，却很少记录过程；你只好自己记住那些不确定的夜晚。",
+  ],
+  loss: [
+    "市场不会认真记住每一次失败的理由，它只会把结果压缩成几句传闻。",
+    "失败项目退出后，外界最爱问的是谁投了，最少问的是当时为什么看起来合理。",
+    "行业对亏损的记忆很短，对标签的记忆很长，你只能在下一次判断里慢慢修正。",
+  ],
+  aum: [
+    "外界看见的是基金没钱了，你看见的是每一次没有退出的时间成本。",
+    "当弹药变少，行业里的声音也会变轻；资本市场有时就是这样现实。",
+    "别人说你保守，你知道自己只是被现金流逼着重新学习节奏。",
+  ],
+  tired: [
+    "朋友说你越来越少出现，行业却觉得你一直在线，这可能就是这份工作的悖论。",
+    "你的朋友圈像还在高强度运转，但真正熟的人知道你已经很久没好好休息。",
+    "行业需要你永远敏锐，生活却提醒你，人不是一套永动的投研系统。",
+  ],
+  default: [
+    "在更大的社会叙事里，你只是资本周期里的一名参与者；但每一次出手，都真实改变过一些公司和一些人。",
+    "你没有改写整个时代，但你参与过一些公司的生长，也承担过一些判断的后果。",
+    "资本市场最后留下的不是每一次会议纪要，而是那些被资金改变过的组织和人。",
   ],
 };
 
@@ -479,6 +1249,7 @@ function freshState() {
   return {
     phase: "title",
     year: START_YEAR,
+    firm: "衡岳创投",
     role: "投资经理",
     partnerYear: null,
     aum: 45,
@@ -501,6 +1272,7 @@ function freshState() {
     eventResult: null,
     lastResults: [],
     seenCompanies: [],
+    seenEvents: [],
     lastHealthNote: null,
   };
 }
@@ -525,8 +1297,20 @@ function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
+function pickByTemplate(list, values = {}) {
+  return pick(list).replace(/\{(\w+)\}/g, (_, key) => values[key] ?? "");
+}
+
+function investorCommentFor(phase, year) {
+  const timeless = investorComments[phase] || [];
+  const eraComments = eraInvestorComments
+    .filter((comment) => comment.phase === phase && comment.from <= year && year <= comment.to)
+    .map((comment) => comment.text);
+  return pick([...timeless, ...eraComments]);
+}
+
 function applyEffects(effects) {
-  state.aum = clamp(state.aum + (effects.aum || 0));
+  state.aum = clamp(state.aum + (effects.aum || 0), 0, 300);
   state.track = clamp(state.track + (effects.track || 0));
   state.network = clamp(state.network + (effects.network || 0));
   state.health = clamp(state.health + (effects.health || 0), 0, 100);
@@ -543,12 +1327,14 @@ function applyCareerMove(move) {
     return;
   }
   if (move === "vc_offer") {
+    state.firm = pick(["峻岭创投", "北辰资本", "云岫基金", "远桥资本"]);
     state.role = state.role === "投资经理" ? "投资副总裁" : state.role;
     state.partnerYear = null;
     state.career = clamp(state.career + 8, 0, 100);
     return;
   }
   if (move === "solo") {
+    state.firm = "自有基金";
     state.role = "创始合伙人";
     state.partnerYear = state.year + 1;
     state.career = clamp(state.career + 16, 0, 100);
@@ -600,7 +1386,7 @@ function generateProjects() {
       model: memo.model,
       warnings: memo.warnings,
       diligence: memo.diligence,
-      investorComment: Math.random() < 0.28 ? pick(investorComments.pre) : null,
+      investorComment: Math.random() < 0.42 ? investorCommentFor("pre", state.year) : null,
     });
   }
   ensureAffordableOpportunity(projects);
@@ -614,7 +1400,7 @@ function ensureAffordableOpportunity(projects) {
     .filter((item) => item.preMoney > minInvestmentCheck())
     .sort((a, b) => a.amount - b.amount)[0];
   if (!project) return;
-  const amount = Math.min(Math.floor(state.aum), Math.max(minInvestmentCheck(), Math.floor(project.preMoney * 0.12)));
+  const amount = Math.min(maxInvestmentCheck(state.year), Math.floor(state.aum), Math.max(minInvestmentCheck(), Math.floor(project.preMoney * 0.12)));
   if (amount >= project.preMoney) return;
   project.amount = amount;
   project.ownership = amount / (project.preMoney + amount);
@@ -626,12 +1412,18 @@ function minInvestmentCheck() {
   return isPartnerRole() ? 8 : 5;
 }
 
+function maxInvestmentCheck(year) {
+  if (year < 2015) return 10;
+  if (year < 2020) return 15;
+  return 20;
+}
+
 function canLeadProject(amount, metrics) {
   const roleBase = isPartnerRole() ? 0.58 : 0.22;
   const capitalFit = state.aum >= amount * 8 ? 0.14 : state.aum >= amount * 5 ? 0.06 : -0.1;
   const relationshipFit = state.network >= 60 ? 0.08 : state.network < 38 ? -0.08 : 0;
   const reputationFit = state.track >= 65 ? 0.06 : state.track < 42 ? -0.06 : 0;
-  const dealSizeFit = amount <= 10 ? 0.08 : amount >= 24 ? -0.1 : 0;
+  const dealSizeFit = amount <= 10 ? 0.08 : amount >= 18 ? -0.06 : 0;
   const hotDealPenalty = metrics.heat > 82 && !isPartnerRole() ? -0.08 : 0;
   const probability = clamp(roleBase + capitalFit + relationshipFit + reputationFit + dealSizeFit + hotDealPenalty, 0.08, 0.82);
   return Math.random() < probability;
@@ -651,7 +1443,8 @@ function buildDealTerms(year, sector, pressure) {
   const preMoney = Math.max(12, Math.round(eraBase * sectorMultiplier * pressureMultiplier));
   const ownership = (isPartnerRole() ? rand(12, 25) : rand(10, 20)) / 100;
   const rawAmount = Math.round(preMoney * ownership);
-  const maxCheck = Math.max(isPartnerRole() ? 30 : 16, Math.floor(state.aum * (isPartnerRole() ? 0.34 : 0.3)));
+  const yearCap = maxInvestmentCheck(year);
+  const maxCheck = Math.floor(Math.min(yearCap, Math.max(isPartnerRole() ? yearCap * 0.9 : yearCap * 0.7, Math.floor(state.aum * (isPartnerRole() ? 0.28 : 0.24)))));
   const minCheck = minInvestmentCheck();
   const amount = clamp(rawAmount, minCheck, Math.min(maxCheck, Math.floor(preMoney * 0.28)));
   return { preMoney, amount, ownership: amount / (preMoney + amount) };
@@ -763,6 +1556,7 @@ function startYear() {
 
 function pickYearEvent() {
   const candidates = eventDeck.filter((event) => {
+    if (state.seenEvents.includes(event.title)) return false;
     const hasRiskyExit = event.choices.some((choice) => choice.riskyExit);
     if (event.rareOpportunity) {
       if (state.year < 2015 || state.role === "投资经理") return false;
@@ -772,19 +1566,17 @@ function pickYearEvent() {
     if (state.year < 2012) return false;
     return Math.random() < 0.12;
   });
-  return pick(candidates.length ? candidates : eventDeck);
+  const event = pick(candidates.length ? candidates : eventDeck.filter((item) => !state.seenEvents.includes(item.title)));
+  if (event) state.seenEvents.push(event.title);
+  return event || null;
 }
 
 function matureInvestments() {
   const matured = state.investments.filter((item) => item.status === "pending" && shouldExitInvestment(item));
   matured.forEach((item) => {
-    const era = eraFor(item.year);
-    const hotBonus = era.hot.includes(item.sector) ? 12 : -4;
-    const entryAge = item.companyFrom ? item.year - item.companyFrom : 2;
-    const timingBonus = entryAge <= 1 ? rand(-10, 18) : entryAge >= 5 ? -8 : 4;
     const exitAge = state.year - item.year;
-    const patienceBonus = exitAge >= 5 ? 5 : 0;
-    const signal = item.team * 0.28 + item.moat * 0.28 + item.heat * 0.14 - item.valuation * 0.24 - item.risk * 0.2 + hotBonus + timingBonus + patienceBonus + rand(-34, 16) - 8;
+    const exitModel = buildExitModel(item, exitAge);
+    const signal = exitModel.signal;
     let multiple;
     let outcome;
     if (signal >= 70) {
@@ -805,10 +1597,13 @@ function matureInvestments() {
     item.outcome = outcome;
     item.exitYear = state.year;
     item.exitAge = exitAge;
-    item.postComment = Math.random() < 0.35 ? pick(investorComments.post) : null;
-    const gain = item.amount * multiple - item.amount;
+    item.exitReasons = exitModel.reasons;
+    item.postComment = Math.random() < 0.45 ? investorCommentFor("post", state.year) : null;
+    const proceeds = item.amount * multiple;
+    const reputationBonus = outcome === "huge" ? item.amount * 0.35 : outcome === "good" ? item.amount * 0.16 : outcome === "flat" ? item.amount * 0.04 : 0;
+    item.aumReturn = proceeds + reputationBonus;
     applyEffects({
-      aum: gain * 0.65,
+      aum: item.aumReturn,
       track: outcome === "huge" ? 18 : outcome === "good" ? 9 : outcome === "flat" ? 0 : -12,
       network: outcome === "huge" ? 9 : outcome === "fail" ? -5 : 2,
       health: outcome === "fail" ? -1 : outcome === "huge" ? 2 : 0,
@@ -816,6 +1611,89 @@ function matureInvestments() {
     });
   });
   return matured;
+}
+
+function buildExitModel(item, exitAge) {
+  const entryEra = eraFor(item.year);
+  const exitEra = eraFor(state.year);
+  const entryAge = item.companyFrom ? item.year - item.companyFrom : 2;
+  const base = item.team * 0.3 + item.moat * 0.26 + item.heat * 0.1 - item.valuation * 0.22 - item.risk * 0.18;
+  const factors = [
+    sectorCycleFactor(item, entryEra, exitEra),
+    timingFactor(item, entryAge),
+    financingWindowFactor(item, exitAge),
+    competitionFactor(item),
+    policyFactor(item),
+    founderFactor(item),
+  ];
+  const patience = exitAge >= 5 ? { score: 5, text: "持有时间拉长，公司终于等到一个相对成熟的退出窗口" } : { score: 0, text: null };
+  const noise = rand(-10, 10);
+  const score = factors.reduce((sum, factor) => sum + factor.score, 0) + patience.score;
+  const signal = base + score + noise - 8;
+  const reasons = [...factors, patience]
+    .filter((factor) => factor.text)
+    .sort((a, b) => Math.abs(b.score) - Math.abs(a.score))
+    .slice(0, 4)
+    .map((factor) => factor.text);
+  return { signal, reasons };
+}
+
+function sectorCycleFactor(item, entryEra, exitEra) {
+  const hotAtEntry = entryEra.hot.includes(item.sector);
+  const hotAtExit = exitEra.hot.includes(item.sector);
+  if (hotAtEntry && hotAtExit) return { score: 12, text: `${sectors[item.sector]}赛道从投资到退出都在资金关注区，下一轮和退出窗口都更顺` };
+  if (hotAtEntry && !hotAtExit) return { score: -10, text: `入场时赛道很热，但退出时市场叙事已经转向，估值中枢被压下来` };
+  if (!hotAtEntry && hotAtExit) return { score: 8, text: `入场时并不拥挤，后来赛道被重新定价，早期价格反而成了优势` };
+  return { score: -2, text: `赛道始终不是主线资金偏好的中心，融资和退出都要靠公司自己证明` };
+}
+
+function timingFactor(item, entryAge) {
+  if (entryAge <= 1 && item.valuation < 70) return { score: 12, text: "你投得足够早，价格还没有被市场情绪完全打满" };
+  if (entryAge <= 1 && item.valuation >= 82) return { score: -4, text: "虽然入场早，但估值已经提前反映了太多乐观预期" };
+  if (entryAge >= 5) return { score: -9, text: "公司已经过了最便宜的阶段，你买到的是被多轮融资抬高后的价格" };
+  if (item.valuation >= 85) return { score: -8, text: "入场估值偏贵，后续每一次融资都需要更强的增长来接住" };
+  return { score: 2, text: "入场时点不算极早，但价格和业务进度还算匹配" };
+}
+
+function financingWindowFactor(item, exitAge) {
+  const windowScore = financingWindowScore(state.year, item.sector);
+  if (windowScore >= 8) return { score: windowScore, text: "退出年份融资窗口打开，后续投资人愿意为增长和确定性继续付钱" };
+  if (windowScore <= -8) return { score: windowScore, text: "退出年份融资窗口收紧，公司不是没有业务，而是下一轮资金变得更难" };
+  if (exitAge <= 2 && item.risk > 65) return { score: -6, text: "持有时间太短，风险还没被业务验证消化，市场不愿给高倍数" };
+  return { score: windowScore, text: null };
+}
+
+function financingWindowScore(year, sector) {
+  let score = 0;
+  if (year >= 2009 && year <= 2014 && sector === "internet") score += 9;
+  if (year >= 2015 && year <= 2018 && ["consumer", "healthcare", "energy"].includes(sector)) score += 7;
+  if (year >= 2020 && ["hardtech", "energy", "ai"].includes(sector)) score += 8;
+  if (year >= 2021 && ["consumer", "internet"].includes(sector)) score -= 8;
+  if (year >= 2022 && sector === "healthcare") score -= 5;
+  return score;
+}
+
+function competitionFactor(item) {
+  if (item.sector === "internet" && item.year >= 2014 && item.moat < 65) return { score: -10, text: "互联网平台化竞争加剧，缺少强网络效应的公司很难守住入口" };
+  if (item.sector === "consumer" && item.year >= 2018 && item.heat > 75 && item.moat < 60) return { score: -9, text: "消费赛道供给迅速拥挤，品牌声量没有转化成足够稳定的复购" };
+  if (item.sector === "ai" && item.moat < 70) return { score: -8, text: "AI 能力迭代太快，公司壁垒不在模型本身，后续被平台和竞品持续挤压" };
+  if (item.moat >= 82) return { score: 9, text: "公司形成了比较清楚的客户、数据或供应链壁垒，竞争没有轻易打穿它" };
+  return { score: item.moat >= 65 ? 3 : -3, text: item.moat >= 65 ? "竞争存在，但公司至少有一块能被客户记住的差异化" : "竞争格局比 BP 里更拥挤，公司没有证明自己不可替代" };
+}
+
+function policyFactor(item) {
+  if (item.sector === "healthcare" && state.year >= 2018 && item.risk > 58) return { score: -8, text: "医保控费、集采和审批周期让医疗项目的商业化比预期更慢" };
+  if (item.sector === "energy" && item.year <= 2018 && state.year >= 2019) return { score: -4, text: "补贴退坡和产能周期改变了新能源公司的利润假设" };
+  if (item.sector === "hardtech" && state.year >= 2020) return { score: 6, text: "国产替代和产业政策给硬科技项目提供了额外订单和融资支撑" };
+  if (item.sector === "ai" && state.year >= 2023 && item.risk > 60) return { score: -5, text: "数据合规、模型备案和客户预算让 AI 项目落地节奏慢于热度" };
+  return { score: 0, text: null };
+}
+
+function founderFactor(item) {
+  if (item.team >= 82 && item.risk < 65) return { score: 10, text: "创始人在融资、招人和战略取舍上没有明显变形，团队执行力托住了周期" };
+  if (item.team >= 72) return { score: 5, text: "创始人能力不错，几次关键调整让公司没有在压力里散掉" };
+  if (item.team <= 45) return { score: -10, text: "创始团队在压力下暴露出组织短板，融资和交付问题互相放大" };
+  return { score: -2, text: "创始团队没有犯致命错误，但也没能把公司带出明显的拐点" };
 }
 
 function shouldExitInvestment(item) {
@@ -845,6 +1723,7 @@ function invest(projectId) {
     status: "pending",
     multiple: null,
     outcome: null,
+    aumReturn: null,
   });
   state.yearLog.push(`投了「${project.name}」：${project.lead ? "领投" : "跟投"} ${money(project.amount)}。退出时间不确定，只能等市场窗口自己打开。`);
   if (pressure) state.yearLog.push(`健康 -${pressure.value}：${pressure.reason}`);
@@ -996,8 +1875,10 @@ function rollCareerEvent() {
   const baseChance = 0.04 + Math.max(0, state.track - 50) * 0.006 + Math.max(0, state.network - 45) * 0.004 + state.career * 0.004 + successCount * 0.025;
   const chance = clamp(state.role === "投资经理" && state.year >= 2011 ? baseChance + 0.12 : baseChance, 0.04, 0.5);
   if (Math.random() > chance) return null;
-  const candidates = careerEventDeck.filter((event) => state.year >= event.minYear && event.requires(state));
-  return candidates.length ? weightedPick(candidates) : null;
+  const candidates = careerEventDeck.filter((event) => !state.seenEvents.includes(event.title) && state.year >= event.minYear && event.requires(state));
+  const event = candidates.length ? weightedPick(candidates) : null;
+  if (event) state.seenEvents.push(event.title);
+  return event;
 }
 
 function weightedPick(items) {
@@ -1066,11 +1947,31 @@ function ending() {
   const lifeLine = lifeEndingLine();
   const socialLine = socialEndingLine();
   const bestLine = best ? `你最亮的一笔是 ${best.year} 年投出的「${best.name}」，退出时拿到 ${best.multiple.toFixed(1)}x。` : "你没有等到一笔真正意义上的退出。";
-  const worstLine = worst && worst.outcome === "fail" ? `你也记得「${worst.name}」：它没有毁掉你，但让你重新理解了“风险自担”四个字。` : "那些没有爆发的项目，也悄悄改变了你的判断方式。";
+  const worstLine = worst && worst.outcome === "fail" ? pickByTemplate(failedInvestmentLines, { name: worst.name }) : pick(quietInvestmentLines);
+  const sectorLine = pick([
+    `你最熟悉的是${sectors[sector] || "多赛道"}项目。`,
+    `如果把这些年摊开看，${sectors[sector] || "多赛道"}是你投入最多注意力的地方。`,
+    `你的判断最终更多留在了${sectors[sector] || "多赛道"}这条线上。`,
+  ]);
   return {
     title: endingTitle.title,
-    description: `${careerLine}\n${lifeLine}\n${socialLine}\n你最熟悉的是${sectors[sector] || "多赛道"}项目。\n${bestLine}\n${worstLine}`,
+    description: endingDescription([careerLine, lifeLine, socialLine, sectorLine, bestLine, worstLine]),
   };
+}
+
+function endingDescription(lines) {
+  const templates = [
+    [0, 3, 4, 5, 1],
+    [0, 1, 4, 2, 5],
+    [3, 4, 0, 5, 2],
+    [0, 4, 3, 1],
+    [1, 0, 2, 4, 5],
+    [0, 5, 4, 2],
+  ];
+  const selected = pick(templates)
+    .map((index) => lines[index])
+    .filter(Boolean);
+  return [...new Set(selected)].join("\n");
 }
 
 function careerEndingLine() {
@@ -1087,22 +1988,22 @@ function careerEndingLine() {
 
 function lifeEndingLine() {
   const totalDeals = state.investments.length;
-  if (state.health <= 25 && totalDeals >= 10) return "家人记得你很多次在饭桌上接起电话，也记得你后来开始学着把手机反扣在桌面。";
-  if (state.health <= 35) return "这份工作没有只消耗工作日，它也偷走了一些睡眠、周末和本来可以慢慢说完的话。";
-  if (state.role === "创始合伙人") return "你把家里的安全感也押进了新基金，庆功宴和现金流压力常常在同一天出现。";
-  if (state.investments.length <= 5 && state.health >= 70) return "你没有把每个机会都变成战役，生活因此保留了一点正常的形状。";
-  if (state.track >= 80) return "身边人未必懂每一个项目，但他们知道你终于等到了一些迟来的证明。";
-  return "你学会在机场、会议室和深夜出租车之间切换，也学会承认生活不是投资组合的附属品。";
+  if (state.health <= 25 && totalDeals >= 10) return pick(lifeLines.exhausted);
+  if (state.health <= 35) return pick(lifeLines.tired);
+  if (state.role === "创始合伙人") return pick(lifeLines.solo);
+  if (state.investments.length <= 5 && state.health >= 70) return pick(lifeLines.balanced);
+  if (state.track >= 80) return pick(lifeLines.proven);
+  return pick(lifeLines.default);
 }
 
 function socialEndingLine() {
-  if (state.network >= 86 && state.track >= 72) return "行业里有人把你讲成故事，也有人把你当成饭局上的样本，夸张和误读一起流传。";
-  if (state.network >= 82) return "你在行业里的名字越来越常被提起，只是声量有时比真实业绩跑得更快。";
-  if (state.track >= 85) return "媒体喜欢把你的判断写成天赋，但只有你知道那里面有多少错过、等待和不确定。";
-  if (state.endingReason === "loss_spiral") return "市场不会认真记住每一次失败的理由，它只会把结果压缩成几句传闻。";
-  if (state.endingReason === "aum_depleted") return "外界看见的是基金没钱了，你看见的是每一次没有退出的时间成本。";
-  if (state.health <= 30) return "朋友说你越来越少出现，行业却觉得你一直在线，这可能就是这份工作的悖论。";
-  return "在更大的社会叙事里，你只是资本周期里的一名参与者；但每一次出手，都真实改变过一些公司和一些人。";
+  if (state.network >= 86 && state.track >= 72) return pick(socialLines.legend);
+  if (state.network >= 82) return pick(socialLines.network);
+  if (state.track >= 85) return pick(socialLines.track);
+  if (state.endingReason === "loss_spiral") return pick(socialLines.loss);
+  if (state.endingReason === "aum_depleted") return pick(socialLines.aum);
+  if (state.health <= 30) return pick(socialLines.tired);
+  return pick(socialLines.default);
 }
 
 function dominantSector() {
@@ -1124,7 +2025,7 @@ function worstInvestment() {
 }
 
 function shell(content) {
-  const roleLine = isPartnerRole() && state.partnerYear ? `${state.role} · ${state.partnerYear} 年开始` : state.role;
+  const roleLine = isPartnerRole() && state.partnerYear ? `${state.firm} · ${state.role} · ${state.partnerYear} 年开始` : `${state.firm} · ${state.role}`;
   return `
     <section class="screen">
       <header class="topbar">
@@ -1150,12 +2051,31 @@ function meter(label, value, cls = "") {
 
 function renderTitle() {
   return `
-    <section class="screen center">
-      <div class="title">
-        <p class="eyebrow">2005-2024 · RMB / USD Fund Career Simulation</p>
-        <h1>中国 VC 投资模拟器</h1>
-        <p class="lede">你从投资经理开始，在二十年产业浪潮里看项目、抢额度、错过风口，也承受 LP、合伙人和身体给出的反馈。</p>
-        <button class="btn" data-action="start">开始看项目</button>
+    <section class="screen title-screen">
+      <div class="terminal-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">FUND CAREER FILE · 2005-2024</p>
+          <h1>中国 VC<br>投资档案</h1>
+          <p class="lede">从投资经理开始，在二十年产业周期里管理弹药、项目、LP、健康和职业声誉。每一次出手都只是开始，真正的答案要等市场给。</p>
+          <div class="hero-actions">
+            <button class="btn" data-action="start">启动职业模拟</button>
+            <span>单局公司与事件不重复</span>
+          </div>
+        </div>
+        <div class="hero-dossier" aria-hidden="true">
+          <div class="dossier-top">
+            <span>CASE CN-VC-2005</span>
+            <strong>ACTIVE</strong>
+          </div>
+          <div class="dossier-grid">
+            <div><span>START ROLE</span><strong>投资经理</strong></div>
+            <div><span>CAPITAL</span><strong>45M</strong></div>
+            <div><span>EVENT POOL</span><strong>117</strong></div>
+            <div><span>COMPANIES</span><strong>179</strong></div>
+          </div>
+          <div class="dossier-line"></div>
+          <p>LP Call · IC Memo · Portfolio Risk · Promotion Track · Health Cost</p>
+        </div>
       </div>
     </section>
   `;
@@ -1206,6 +2126,22 @@ function renderProjects() {
 function renderProject(project, maxDeals) {
   const selected = state.selected.includes(project.id);
   const disabled = selected || state.selected.length >= maxDeals || state.aum < project.amount;
+  const investLabel = selected
+    ? "已经进入组合"
+    : state.aum < project.amount
+      ? "AUM 不足"
+      : state.selected.length >= maxDeals
+        ? "本年额度已满"
+        : "投资";
+  const investHint = selected
+    ? "等待退出"
+    : state.aum < project.amount
+      ? "无法出手"
+      : state.selected.length >= maxDeals
+        ? "明年再看"
+        : project.lead
+          ? "领投此轮"
+          : "加入本轮";
   return `
     <article class="project">
       <div class="project-head">
@@ -1245,7 +2181,10 @@ function renderProject(project, maxDeals) {
           <p>${project.diligence.answer}</p>
         </div>
       </div>
-      <button class="btn secondary" data-action="invest" data-id="${project.id}" ${disabled ? "disabled" : ""}>${selected ? "已经进入组合" : "投资"}</button>
+      <button class="btn invest-button" data-action="invest" data-id="${project.id}" ${disabled ? "disabled" : ""}>
+        <span>${investLabel}</span>
+        <small>${investHint}</small>
+      </button>
     </article>
   `;
 }
@@ -1259,7 +2198,8 @@ function renderPortfolioUpdate() {
         ${state.lastResults.map((item) => {
           const cls = item.outcome === "fail" ? "result-bad" : item.outcome === "flat" ? "result-flat" : "result-good";
           const label = item.outcome === "huge" ? "大获成功" : item.outcome === "good" ? "稳步增长" : item.outcome === "flat" ? "勉强保本" : "投资失败";
-          return `<div class="log-item"><strong class="${cls}">${item.name} · ${label} · ${item.multiple.toFixed(1)}x</strong><br>${item.year} 年投出的 ${sectors[item.sector]} 项目在持有 ${item.exitAge} 年后给出了答案。${item.postComment ? `<div class="quote-note compact">${item.postComment}</div>` : ""}</div>`;
+          const returnText = item.aumReturn ? `本次退出回款让 AUM 增加 ${money(item.aumReturn)}。` : "";
+          return `<div class="log-item"><strong class="${cls}">${item.name} · ${label} · ${item.multiple.toFixed(1)}x</strong><br>${item.year} 年投出的 ${sectors[item.sector]} 项目在持有 ${item.exitAge} 年后给出了答案。${returnText}${item.postComment ? `<div class="quote-note compact">${item.postComment}</div>` : ""}</div>`;
         }).join("")}
       </div>
       <div class="actions">
